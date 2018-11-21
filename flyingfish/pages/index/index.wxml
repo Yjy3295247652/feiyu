@@ -1,0 +1,29 @@
+<!--pages/index/index.wxml-->
+
+<view class='header'>飞鱼教育</view>
+<swiper indicator-dots="true" autoplay="true" interval="3000" duration="300" class='swipers'>
+  <block wx:for="{{banner}}" wx:key="{{index}}">
+    <swiper-item>
+      <image src="{{feiyu}}/{{item.image}}" class="slide-image" mode="aspectFill" />
+    </swiper-item>
+  </block>
+</swiper>
+<view class='option_card'>
+  <scroll-view scroll-x="true" class='scroll' scroll-left="{{num}}" scroll-with-animation="true">
+    <view class="navbar">
+      <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="{{index}}" bindtap="navbarTap" data-classify="{{item.classifyList}}" data-directionId="{{item.direction.id}}">{{item.direction.name}}</text>
+    </view>
+  </scroll-view>
+
+  <block wx:if="{{classfy}}">
+    <view class='nohas'>该课程还没有下属分类哦</view>
+  </block>
+  <block wx:else>
+    <block wx:for="{{navbar}}" wx:key="{{index}}">
+      <view hidden="{{currentTab!==index}}">
+        <list titlename="{{item.classifyList}}" listdata="{{listdata}}" flag="{{1}}" flags="{{1}}" directionId="{{item.direction.id}}" bind:a="getClassifyListId" feiyu="{{feiyu}}" activeid="{{activeid}}" bottomShow="{{bottomShow}}"></list>
+      </view>
+    </block>
+  </block>
+
+</view>

@@ -1,0 +1,48 @@
+<wxs src="../../wxs/tool.wxs" module="tool" />
+
+<view class='my'>
+  <view class='head'>
+    <image src='{{userInfomation.head_image}}' />
+  </view>
+  <view class='message'>
+    <view class='name' bindtap='toLogin'>{{userInfomation.nickname}}</view>
+    <view class='id'>
+      <view class='id-img'></view>
+      <view class='id-number'>{{phone}}</view>    
+    </view>
+  </view>
+  <!-- 签到 -->
+  <view class="qiandao" bindtap="qiandao">
+    <view class="q1">
+      <view class="q2">
+        <text class="text1">{{isSignIn}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='content'>
+    <navigator class='nei' hover-class='none' url='/pages/collectedCourses/collectedCourses'>
+      <image src='/image/my/live-broadcast.png'></image>
+      <view class='nei-name'>已收藏课程</view>
+    </navigator>
+    <navigator class='nei' hover-class='none' url='/pages/purchasedCourses/purchasedCourses'>
+      <image src='/image/my/course.png'></image>
+      <view class='nei-name'>已购买课程</view>
+    </navigator>
+    <navigator class='nei' hover-class='none' url='/pages/watchingHistory/watchingHistory'>
+      <image src='/image/my/history.png'></image>
+      <view class='nei-name'>观看历史</view>
+    </navigator>
+    <navigator class='nei' hover-class='none' url='/pages/popularActivity/popularActivity'>
+      <image src='/image/my/activity.png'></image>
+      <view class='nei-name'>热门活动</view>
+    </navigator>
+    <navigator class='nei' hover-class='none' url='/pages/install/install'>
+      <image src='/image/my/set-up.png'></image>
+      <view class='nei-name'>设置</view>
+    </navigator>
+    <navigator class='nei' hover-class='none' url=''>
+      <image src='/image/my/expect.png'></image>
+      <view class='nei-name'>敬请期待</view>
+    </navigator>
+  </view>
