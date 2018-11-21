@@ -10,6 +10,7 @@
     "pages/popularActivity/popularActivity",
     "pages/install/install"
   ],
+  "enablePullDownRefresh": true,
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

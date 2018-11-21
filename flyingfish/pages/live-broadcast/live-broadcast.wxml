@@ -1,7 +1,4 @@
-<view class="header">
-  <view class='icon' bindtap='top'></view>
-  <view>课程详情</view>
-</view>
+
 <video wx:if="{{flag}}" id="myVideo" class='video' src="{{videoAddress}}" binderror="videoErrorCallback" controls direction="90" autoplay="true"></video>
 <video wx:if="{{!flag}}" id="myVideo" class='video' src="{{videoAddress}}" binderror="videoErrorCallback" controls direction="90" autoplay="true"></video>
 

@@ -13,7 +13,7 @@
   </view>
   <!-- 签到 -->
   <view class="qiandao" bindtap="qiandao">
-    <view class="q1">
+    <view class="q1 {{qwer?'q1_qian':''}}">
       <view class="q2">
         <text class="text1">{{isSignIn}}</text>
       </view>

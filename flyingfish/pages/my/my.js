@@ -9,7 +9,8 @@ Page({
     code: '',
     userInfomation: null,
     phone: '',
-    isSignIn:"签到"
+    isSignIn: "签到",
+    qwer: null
   },
   //获取域名
   getname() {
@@ -19,13 +20,17 @@ Page({
     })
   },
   // 签到
-  qiandao: function (e) {
+  qiandao: function(e) {
     var that = this;
-    if (e._relatedInfo.anchorTargetText == "已签到"){
+    if (e._relatedInfo.anchorTargetText == "已签到") {
       wx.showToast({
         title: '今日已签到',
       })
-    } else if (e._relatedInfo.anchorTargetText == "签到"){
+    } else if (e._relatedInfo.anchorTargetText == "签到") {
+      that.setData({
+        qwer: true
+      })
+
       wx.request({
         url: that.data.feiyu + '/phone/login/personSignIn',
         header: {
@@ -42,7 +47,7 @@ Page({
           } else {
             wx.showToast({
               title: '签到失败，请重新签到',
-              icon:"none"
+              icon: "none"
             })
             that.setData({
               isSignIn: "签到"
@@ -50,29 +55,34 @@ Page({
           }
         }
       })
+      setInterval(function() {
+        that.setData({
+          qwer: false
+        })
+      }, 800)
     }
   },
   // 检查是否签到
-  checkQiandao(){
+  checkQiandao() {
     var that = this;
     wx.request({
       url: that.data.feiyu + '/phone/login/isSignIn',
       header: {
         "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
       },
-      success(res){
-        if (res.data.code == 0 && res.data.isSignIn == true){
+      success(res) {
+        if (res.data.code == 0 && res.data.isSignIn == true) {
           that.setData({
-            isSignIn:"已签到"
+            isSignIn: "已签到"
           })
-        } else if (res.data.code == 0 && res.data.isSignIn == false){
+        } else if (res.data.code == 0 && res.data.isSignIn == false) {
           that.setData({
             isSignIn: "签到"
           })
-        }else if(res.data.code == 1){
+        } else if (res.data.code == 1) {
           wx.showToast({
             title: '服务器错误！',
-            icon:'none'
+            icon: 'none'
           })
         }
       }

@@ -1,58 +1,43 @@
-/* pages/index/index.wxss */
-.header{
-  width: 100%;
-  padding: 40rpx 0 0 24rpx;
-  font-size: 36rpx;
-  color: #111;
-  line-height: 90rpx;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  background: #fff;
-}
-.swipers{
+.swipers {
   width: 100%;
   height: 314rpx;
-  margin-top: 130rpx;
 }
-.slide-image{
+
+.slide-image {
   width: 100%;
   height: 100%;
 }
-.option_card{
+
+.option_card {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-.scroll{
+
+.scroll {
   width: 750rpx;
   height: 100rpx;
   overflow: hidden;
-}
-.navbar{
-  width: auto;
-  height: 100%;
-  /* flex: none; */
   display: flex;
-  background: #fff;
   flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: center;
 }
-.navbar .item{
-  min-width: 255rpx;
+
+.item {
+  height: 100rpx;
+  padding: 29rpx 50rpx;
   position: relative;
-  /* flex: auto; */
   text-align: center;
   line-height: 100rpx;
   white-space: nowrap;
   font-size: 32rpx;
 }
-.navbar .item.active{
+
+.item.active {
+  height: 100rpx;
   color: #6eafdc;
 }
-.navbar .item.active:after{
+
+.item.active:after {
   content: "";
   display: block;
   position: absolute;
@@ -64,7 +49,8 @@
   width: 200rpx;
   background: #6eafdc;
 }
-.nohas{
+
+.nohas {
   width: 100%;
   height: 200rpx;
   text-align: center;

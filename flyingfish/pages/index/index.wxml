@@ -1,6 +1,4 @@
 <!--pages/index/index.wxml-->
-
-<view class='header'>飞鱼教育</view>
 <swiper indicator-dots="true" autoplay="true" interval="3000" duration="300" class='swipers'>
   <block wx:for="{{banner}}" wx:key="{{index}}">
     <swiper-item>
@@ -10,9 +8,9 @@
 </swiper>
 <view class='option_card'>
   <scroll-view scroll-x="true" class='scroll' scroll-left="{{num}}" scroll-with-animation="true">
-    <view class="navbar">
+    <!-- <view class="navbar"> -->
       <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="{{index}}" bindtap="navbarTap" data-classify="{{item.classifyList}}" data-directionId="{{item.direction.id}}">{{item.direction.name}}</text>
-    </view>
+    <!-- </view> -->
   </scroll-view>
 
   <block wx:if="{{classfy}}">

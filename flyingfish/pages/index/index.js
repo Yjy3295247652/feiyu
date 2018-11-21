@@ -14,26 +14,29 @@ Page({
     feiyu: '',
     bottomShow: false,
     code: '',
-    num:0,
-    classfy:false
+    num: 0,
+    classfy: false
   },
+  // 切换方向
   navbarTap: function(e) {
-    // console.log(e)
     this.setData({
       currentTab: e.currentTarget.dataset.idx,
       directionId: e.currentTarget.dataset.directionId,
       activeid: 0,
-      num:e.target.offsetLeft-127
+      num: e.target.offsetLeft - 127
     })
     if (e.currentTarget.dataset.classify.length > 0) {
       this.setData({
         classfyId: e.currentTarget.dataset.classify[0].id,
       })
     } else {
-      classfyId: 0
+      this.setData({
+        classfyId: 0
+      })
     }
     this.getCurriculum();
   },
+  // 获取域名
   getname() {
     var feiyu = getApp().globalData.host;
     this.setData({
@@ -50,11 +53,13 @@ Page({
     this.getCurriculum();
     this.getBanner()
   },
-
+  // 获取方向
   getDirection() {
     wx.request({
       url: this.data.feiyu + '/phone/findDirectionAndClass',
-      header: { "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId") },
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+      },
       success: res => {
         if (res.data && res.statusCode == '200') {
           this.setData({
@@ -65,13 +70,19 @@ Page({
     })
     this.getCurriculum();
   },
+  // 获取课程
   getCurriculum() {
     var directionId = this.data.directionId;
     var classfyId = this.data.classfyId;
     if (classfyId > 0) {
+      this.setData({
+        classfy: false
+      })
       wx.request({
         url: this.data.feiyu + '/phone/findCourse?directionId=' + directionId + '&classfyId=' + classfyId,
-        header: { "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId") },
+        header: {
+          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        },
         success: res => {
           this.setData({
             listdata: res.data
@@ -80,20 +91,24 @@ Page({
       })
     } else {
       this.setData({
-        classfy:true
+        classfy: true
       })
     }
   },
+  // 获取阶段ID
   getClassifyListId(e) {
     this.setData({
       classfyId: e.detail.val //赋值到父组件的data集合
     })
     this.getCurriculum();
   },
+  // 获取轮播图
   getBanner() {
     wx.request({
       url: this.data.feiyu + '/phone/findCarouse',
-      header: { "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId") },
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+      },
       success: res => {
         if (res.data) {
           this.setData({
@@ -103,6 +118,7 @@ Page({
       }
     })
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -136,12 +152,19 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    wx.startPullDownRefresh({
+      success() {},
+      fail() {}
+    })
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
+  // 上拉加载
+  loadMore() {
+
+  },
   onReachBottom: function() {
     this.setData({
       bottomShow: true
