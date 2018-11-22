@@ -10,7 +10,8 @@ Page({
     userInfomation: null,
     phone: '',
     isSignIn: "签到",
-    qwer: null
+    qwer: null,
+    integral:0
   },
   //获取域名
   getname() {
@@ -99,6 +100,7 @@ Page({
           "Cookie": "JSESSIONID=" + sessionId
         },
         success(res) {
+          console.log(res);
           var li1 = res.data.userInfo.phone.substring(0, 3);
           var li2 = res.data.userInfo.phone.substring(8, 12);
           that.setData({
