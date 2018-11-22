@@ -5,10 +5,17 @@
     <image src='{{userInfomation.head_image}}' />
   </view>
   <view class='message'>
-    <view class='name' bindtap='toLogin'>{{userInfomation.nickname}}</view>
+    <view class='name' bindtap='toLogin'>游客{{userInfomation.nickname}}</view>
     <view class='id'>
+<<<<<<< HEAD
       <view class='id-img'></view>
       <view class='id-number'>{{userInfomation.nickname}}</view>    
+=======
+      <view class="leiji">累计积分：</view>
+      <text>{{integral}}</text>
+      <!-- <view class='id-img'></view> -->
+      <!-- <view class='id-number'>{{phone}}</view>     -->
+>>>>>>> c84ad4e13e0b2575682d625a4d5e3e03e4d8993b
     </view>
   </view>
   <!-- 签到 -->
