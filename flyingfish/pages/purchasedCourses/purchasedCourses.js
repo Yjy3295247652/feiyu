@@ -5,14 +5,35 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    feiyu:'',
+    listdata:[]
   },
 
+  //获取域名
+  getname() {
+    var feiyu = getApp().globalData.host;
+    this.setData({
+      feiyu: feiyu
+    })
+  },
+  // 获取购买课程
+  getBuyedCourse(){
+    wx.request({
+      url: this.data.feiyu + '/phone/course/buyedCourse',
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+      },
+      success(res){
+        console.log(res.data)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getname();
+    this.getBuyedCourse();
   },
 
   /**

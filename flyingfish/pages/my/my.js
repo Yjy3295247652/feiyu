@@ -8,7 +8,6 @@ Page({
     feiyu: '',
     code: '',
     userInfomation: null,
-    phone: '',
     isSignIn: "签到",
     qwer: null
   },
@@ -95,14 +94,11 @@ Page({
       wx.request({
         url: this.data.feiyu + '/phone/login/personal_basic',
         header: {
-          "Cookie": "JSESSIONID=" + sessionId
+          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
         },
         success(res) {
-          var li1 = res.data.userInfo.phone.substring(0, 3);
-          var li2 = res.data.userInfo.phone.substring(8, 12);
           that.setData({
-            userInfomation: res.data.userInfo,
-            phone: li1 + "****" + li2
+            userInfomation: res.data.userInfo
           })
         }
       })
@@ -111,8 +107,7 @@ Page({
         userInfomation: {
           nickname: "游客",
           head_image: ""
-        },
-        phone: "000****0000"
+        }
       })
     }
   },
