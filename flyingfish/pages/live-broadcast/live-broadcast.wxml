@@ -49,5 +49,7 @@
 
   </view>
 </view>
-<view class='enter' wx:if="{{price == 0}}" bindtap='getCollectCourse' data-courseId="{{}}">加入收藏</view>
-<view class='enter' wx:else>立即购买</view>
+<view class='enter' wx:if="{{price == 0 && collectText==false}}" bindtap='getCollectCourse'>加入收藏</view>
+<view class='enter' wx:if="{{price == 0 && collectText==true}}" bindtap='unCollect'>取消收藏</view>
+<view class='enter' wx:if="{{price != 0 && isBuy==0}}">立即购买</view>
+<!-- <view class='enter' wx:if="{{price != 0 && isBuy==1}}">立即购买</view> -->

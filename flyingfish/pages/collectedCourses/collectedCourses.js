@@ -20,7 +20,6 @@ Page({
    */
   onLoad: function(options) {
     this.getname();
-    this.getCollectCourse();
   },
 
   /**

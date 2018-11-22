@@ -9,7 +9,8 @@
     "pages/purchasedCourses/purchasedCourses",
     "pages/watchingHistory/watchingHistory",
     "pages/popularActivity/popularActivity",
-    "pages/install/install"
+    "pages/install/install",
+    "pages/videoroom/videoroom"
   ],
   "window": {
     "enablePullDownRefresh": true,
