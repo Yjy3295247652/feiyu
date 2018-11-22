@@ -18,6 +18,39 @@ Page({
       feiyu: feiyu
     })
   },
+  //获取不同分类
+  getswitch:function(e){
+    switch (e) {
+      case 1: {
+        this.setData({
+          selected1: "selected"
+        })
+        wx.setNavigationBarTitle({
+          title: '正在学习'
+        })
+        break;
+      }
+      case 2: {
+        this.setData({
+          selected2: "selected"
+        })
+        wx.setNavigationBarTitle({
+          title: '已购课程'
+        })
+        break;
+      }
+      case 3: {
+        this.setData({
+          selected3: "selected"
+        })
+        wx.setNavigationBarTitle({
+          title: '收藏课程'
+        })
+        break;
+      }
+
+    }
+  },
   //获取正在学习课程
   getstudying(){
 
@@ -79,37 +112,8 @@ Page({
     this.setData({
       selected:parseInt(options.select)
     })
-    switch(this.data.selected){
-      case 1:{
-        this.setData({
-          selected1:"selected"
-        })
-        wx.setNavigationBarTitle({
-          title: '正在学习'
-        })
-        break;
-      }
-      case 2:{
-        this.setData({
-          selected2: "selected"
-        })
-        wx.setNavigationBarTitle({
-          title: '已购课程'
-        })
-        break;
-      }
-      case 3: {
-        this.setData({
-          selected3: "selected"
-        })
-        wx.setNavigationBarTitle({
-          title: '收藏课程'
-        })
-        break;
-      }
-      this.myList = this.selectComponent('#myList');
-
-    }
+    this.getswitch(this.data.selected);
+    this.myList = this.selectComponent('#myList');
     
   },
 
