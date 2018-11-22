@@ -11,16 +11,12 @@ Page({
     courseId: '',
     videoAddress: null,
     flag: true,
-    bottomShow: false
+    bottomShow: false,
+    isChecked:''
   },
   navbarTap: function(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
-    })
-  },
-  top: function() {
-    wx.navigateBack({
-      delta: 1 //想要返回的层级
     })
   },
   getname() {
@@ -32,7 +28,8 @@ Page({
   getVideo(e) {
     this.setData({
       videoAddress: e.currentTarget.dataset.address.video_address,
-      flag: !this.data.flag
+      flag: !this.data.flag,
+      isChecked: e.currentTarget.dataset.id,
     })
     this.getlistdata();
   },
