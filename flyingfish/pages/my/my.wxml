@@ -3,7 +3,7 @@
 <view class='my'>
   <view class='head'>
     <image src='{{userInfomation.head_image}}' />
-  </view>
+  </view> 
   <view class='message'>
     <view class='name' bindtap='toLogin'>{{userInfomation.nickname}}</view>
     <view class='id'>

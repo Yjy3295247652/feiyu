@@ -1,3 +1,6 @@
 {
+  "usingComponents": {
+    "myList": "/components/myList/myList"
+  },
   "navigationBarTitleText": "已收藏课程"
 }
