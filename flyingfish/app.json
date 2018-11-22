@@ -10,8 +10,8 @@
     "pages/popularActivity/popularActivity",
     "pages/install/install"
   ],
-  "enablePullDownRefresh": true,
   "window": {
+    "enablePullDownRefresh": true,
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
