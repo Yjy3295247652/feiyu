@@ -15,10 +15,14 @@ Page({
     bottomShow: false,
     code: '',
     num: 0,
-    classfy: false
+    classfy: false,
+    select:0
   },
-  //已购买页面
-  getbought:function(){
+  //跳转至已购买页面
+  getbought:function(e){
+    this.setData({
+      select: e.currentTarget.dataset.select
+    })
     wx.request({
       url: this.data.feiyu +'/phone/course/buyedCourse',
       header: {
@@ -35,7 +39,7 @@ Page({
           })
         }else if(res.data.code == 0){
           wx.navigateTo({
-            url: '../course/course',
+            url: '../course/course?select='+this.data.select,
           })
         }
       }

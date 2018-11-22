@@ -1,53 +1,3 @@
-/* components/list/list.wxss */
-
-.list {
-  width: 100%;
-  height: auto;
-}
-
-.list_title {
-  width: auto;
-  height: 100rpx;
-  overflow: hidden;
-}
-
-.list_title-content {
-  width: 750rpx;
-  height: 100%;
-  padding: 0 24rpx;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-}
-
-.scroll-view-item {
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: nowrap;
-}
-
-.title_content_text {
-  width: auto;
-  font-size: 28rpx;
-  color: #666;
-  text-align: center;
-  line-height: 55rpx;
-  padding: 0 19rpx;
-  border: 1rpx solid #fff;
-  margin:0 10rpx;
-  white-space: nowrap;
-}
-
-.active {
-  background: #448cf0;
-  color: #fff;
-  box-shadow: 0 0 5rpx  #448cf0;
-  border-radius: 10rpx;
-  box-sizing: border-box;
-}
-
 .list-lis {
   width: 100%;
   height: auto;
@@ -71,6 +21,7 @@
   width: 301rpx;
   height: 195rpx;
   margin-right: 28rpx;
+  background: #89d0e0;
 }
 
 .li_pic image {
@@ -168,23 +119,31 @@
 }
 .l {
   background-color: white;
-  height: 280rpx;
+  height: 242;
   width: 750rpx;
   display: flex;
   flex-direction: row;
 }
 
 .r {
-  height: 280rpx;
+  height: 242rpx;
   display: flex;
   direction: row;
   text-align: center;
   vertical-align: middle;
-  line-height: 280rpx;
 }
 
 .delete {
   background-color: red;
   color: #fff;
   width: 150rpx;
+}
+.deleteZi{
+  width: 50rpx;
+  height: 100%;
+  font-size: 32rpx;
+  margin:0 auto;
+  line-height: 50rpx;
+  padding-top:20rpx;
+  box-sizing: border-box;
 }

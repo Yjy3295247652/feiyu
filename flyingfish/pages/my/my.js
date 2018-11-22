@@ -8,7 +8,6 @@ Page({
     feiyu: '',
     code: '',
     userInfomation: null,
-    phone: '',
     isSignIn: "签到",
     qwer: null,
     integral:0
@@ -96,10 +95,9 @@ Page({
       wx.request({
         url: this.data.feiyu + '/phone/login/personal_basic',
         header: {
-          "Cookie": "JSESSIONID=" + sessionId
+          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
         },
         success(res) {
-          console.log(res);
           that.setData({
             userInfomation: res.data.userInfo,
             integral:res.data.integral.integralNumber

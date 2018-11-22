@@ -5,7 +5,7 @@ Component({
    */
   properties: {
     titlename:Array,
-    listdata:Array,
+    listdata:Array, 
     flag:Boolean,
     flags:Boolean,
     directionId:String,

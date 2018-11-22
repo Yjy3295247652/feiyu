@@ -50,6 +50,36 @@ Page({
     console.log('视频错误信息:')
     console.log(e.detail.errMsg)
   },
+  // 获取收藏课程
+  getCollectCourse() {
+    wx.request({
+      url: this.data.feiyu + '/phone/course/course_collect',
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+      },
+      data: {
+        courseId: this.data.courseId
+      },
+      success(res) {
+        console.log(res.data)
+      }
+    })
+  },
+  // 取消收藏
+  unCollect(e) {
+    wx.request({
+      url: this.data.feiyu + '/phone/course/course_uncollect',
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+      },
+      data: {
+        courseId: this.data.courseId
+      },
+      success(res) {
+        console.log(res.data)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
