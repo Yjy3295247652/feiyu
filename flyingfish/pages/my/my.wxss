@@ -33,7 +33,7 @@
 }
 
 .my .message .name {
-  font-size: 40rpx;
+  font-size: 36rpx;
   color: #fff;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -41,13 +41,14 @@
 }
 
 .my .message .id {
-  font-size: 20rpx;
-  color: #97d2ff;
+  font-size: 28rpx;
+  color: #ddd;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   display: flex;
   align-items: center;
+  margin: 0;
 }
 
 .my .message .id .id-img {
@@ -153,9 +154,11 @@
   text-align: center;
   box-sizing: border-box;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -80rpx 0 0 -80rpx;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
 }
 
 .q2 .text1 {

@@ -4,7 +4,7 @@ const query = wx.createSelectorQuery()
 
 // 倒计时事件 单位s
 var countdown = 60;
-var settime = function (that) {
+var settime = function(that) {
   if (countdown == 0) {
     that.setData({
       codeIsCanClick: true
@@ -18,10 +18,9 @@ var settime = function (that) {
     })
     countdown--;
   }
-  setTimeout(function () {
+  setTimeout(function() {
     settime(that)
-  }, 1000
-  )
+  }, 1000)
 }
 
 Page({
@@ -30,13 +29,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    hasUserInfo: false,
+    hasUserInfo: true,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: '',
     code: 0,
     isPhone: '',
-    smsCode:null, 
+    smsCode: null,
     codeIsCanClick: true,
+    encrypt: '',
+    phoneNumber: '',
+    qwer: null
   },
   getname() {
     var feiyu = getApp().globalData.host;
@@ -45,21 +47,31 @@ Page({
     })
   },
   getUserInfo: function(e) {
+    var that = this;
     if (e.detail.userInfo) {
       app.globalData.userInfo = e.detail.userInfo
       this.setData({
-        userInfo: e.detail.userInfo,
+        userInfo: e.detail.userInfo
       })
-      this.isLogin();
+      setTimeout(function(){
+        that.setData({
+          qwer: true
+        })
+      },400)
+      var openId = wx.getStorageSync("openId")
+      if (openId) {
+        wx.reLaunch({
+          url: '../index/index',
+        })
+      } else {
+        this.isLogin();
+      }
     } else {
       wx.showToast({
-        title: '授权失败！',
+        title: '请授权我们的小程序',
         icon: 'none',
         duration: 2000,
         mask: true,
-      })
-      wx.reLaunch({
-        url: '../index/index',
       })
     }
   },
@@ -76,14 +88,15 @@ Page({
               userInfo: that.data.userInfo
             },
             success(res) {
-              wx.setStorageSync("sessionId", res.data.sessionId)
+              wx.setStorageSync("sessionId", res.data.sessionId);
+              wx.setStorageSync("openId", res.data.openId);
               if (res.data.code == 0 && res.data.data == true) {
                 wx.reLaunch({
                   url: '../index/index',
                 })
               } else if (res.data.code == 0 && res.data.data == false) {
                 that.setData({
-                  hasUserInfo: true
+                  hasUserInfo: false
                 })
               } else if (res.data.code = 1) {
                 wx.showToast({
@@ -106,10 +119,34 @@ Page({
       }
     })
   },
-  getPhone(e) {
+  getPhoneNumber(e) {
+    var that = this;
     this.setData({
-      phoneNumber: e.detail.value
+      phoneNumber: e.detail
     })
+    if (that.data.phoneNumber) {
+      wx.request({
+        url: that.data.feiyu + '/phone/login/afterWeChatPhone',
+        data: {
+          encrypt: e.detail
+        },
+        header: {
+          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        },
+        success(res) {
+          console.log(res.data)
+          if (res.data.code == 0) {
+            wx.reLaunch({
+              url: '../index/index',
+            })
+          } else {
+
+          }
+        }
+      })
+    } else {
+
+    }
   },
   getVerificationCode() {
     if (this.data.phoneNumber == undefined || this.data.phoneNumber == null || this.data.phoneNumber == '') {
@@ -117,11 +154,13 @@ Page({
         title: '手机号不能为空，请输入手机号',
         icon: 'none'
       })
-    }else{
-      settime(this);                    
+    } else {
+      settime(this);
       wx.request({
         url: this.data.feiyu + '/phone/login/register_sms?jbPhone=' + this.data.phoneNumber,
-        header: { "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")},
+        header: {
+          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        },
         success(res) {
           wx.showToast({
             title: '验证码发送成功',
@@ -152,7 +191,9 @@ Page({
     } else {
       wx.request({
         url: that.data.feiyu + '/phone/login/bindPhone?smsCode=' + that.data.smsCode,
-        header: { "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId") },
+        header: {
+          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        },
         success(res) {
           console.log(res)
           if (res.data.code == 1) {
@@ -162,12 +203,12 @@ Page({
               duration: 2000,
               mask: true,
             })
-           wx.reLaunch({
+            wx.reLaunch({
               url: '../index/index',
             })
-          } else if (res.data.code == 0){
+          } else if (res.data.code == 0) {
             wx.reLaunch({
-               url: '../index/index',
+              url: '../index/index',
             })
           }
         }

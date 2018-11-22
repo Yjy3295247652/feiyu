@@ -7,8 +7,10 @@
   <view class='message'>
     <view class='name' bindtap='toLogin'>{{userInfomation.nickname}}</view>
     <view class='id'>
-      <view class='id-img'></view>
-      <view class='id-number'>{{phone}}</view>    
+      <view class="leiji">累计积分：</view>
+      <text>{{integral}}</text>
+      <!-- <view class='id-img'></view> -->
+      <!-- <view class='id-number'>{{phone}}</view>     -->
     </view>
   </view>
   <!-- 签到 -->

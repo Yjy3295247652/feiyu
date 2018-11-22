@@ -130,7 +130,7 @@
   color: #fff;
 }
 
-.button1 {
+.button1 , .button2 {
   width: 300rpx;
   height: 60rpx;
   border-radius: 30rpx;
@@ -144,6 +144,9 @@
   text-align: center;
   line-height: 60rpx;
   font-size: 32rpx;
+}
+.button2{
+  top: 60%;
 }
 
 

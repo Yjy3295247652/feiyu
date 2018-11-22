@@ -29,8 +29,7 @@ Component({
    */
   methods: {
     getid: function (e) {
-      // console.log(e)
-      // console.log(this.directionId)
+      console.log(e)
       this.setData({
         activeid: e.target.dataset.id,
         num: e.target.offsetLeft - 86

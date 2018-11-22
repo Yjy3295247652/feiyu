@@ -10,7 +10,8 @@ Page({
     userInfomation: null,
     phone: '',
     isSignIn: "签到",
-    qwer: null
+    qwer: null,
+    integral:0
   },
   //获取域名
   getname() {
@@ -30,7 +31,6 @@ Page({
       that.setData({
         qwer: true
       })
-
       wx.request({
         url: that.data.feiyu + '/phone/login/personSignIn',
         header: {
@@ -99,21 +99,19 @@ Page({
           "Cookie": "JSESSIONID=" + sessionId
         },
         success(res) {
-          console.log(res)
           var li1 = res.data.userInfo.phone.substring(0, 3);
           var li2 = res.data.userInfo.phone.substring(8, 12);
           that.setData({
             userInfomation: res.data.userInfo,
             phone: li1 + "****" + li2
           })
-          
         }
       })
     } else {
       that.setData({
         userInfomation: {
           nickname: "游客",
-          head_image: "",
+          head_image: ""
         },
         phone: "000****0000"
       })
