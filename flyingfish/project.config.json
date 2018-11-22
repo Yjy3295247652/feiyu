@@ -37,7 +37,11 @@
 			"list": []
 		},
 		"miniprogram": {
+<<<<<<< HEAD
 			"current": 3,
+=======
+			"current": 1,
+>>>>>>> 50fc6d6e8f3efab2ee8c424e13fe998647fda63f
 			"list": [
 				{
 					"id": -1,
@@ -47,8 +51,8 @@
 				},
 				{
 					"id": 1,
-					"name": "broadcast",
-					"pathName": "pages/live-broadcast/live-broadcast",
+					"name": "purchasedCourses",
+					"pathName": "pages/purchasedCourses/purchasedCourses",
 					"query": ""
 				},
 				{
