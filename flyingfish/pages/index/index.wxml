@@ -24,7 +24,7 @@
     </block>
   </block>
   <!-- 正在学习1，已购买2，收藏课程3 -->
-  <view class="bought" data-select='1' bindtap="getbought">
+  <view class="bought" data-select='2' bindtap="getbought">
     <!-- <view class="yigou yigou1">已购买</view>
     <view class="yigou yigou2">课程</view> -->
   </view>

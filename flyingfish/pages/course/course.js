@@ -18,34 +18,58 @@ Page({
       feiyu: feiyu
     })
   },
-  //获取不同分类
+  //获取不同分类效果
   getswitch:function(e){
     switch (e) {
       case 1: {
-        this.setData({
-          selected1: "selected"
+        var that = this;
+        wx.showLoading({
+          title: '正在加载',
+          success:res=>{
+            wx.setNavigationBarTitle({
+              title: '正在学习'
+            });
+            that.setData({
+              selected1: "selected"
+            });
+            this.getstudying();
+          }
         })
-        wx.setNavigationBarTitle({
-          title: '正在学习'
-        })
+        
         break;
       }
       case 2: {
-        this.setData({
-          selected2: "selected"
+        var that = this;
+        wx.showLoading({
+          title: '正在加载',
+          success:res=>{
+            that.setData({
+              selected2: "selected"
+            });
+            wx.setNavigationBarTitle({
+              title: '已购课程'
+            });
+            that.getbought();
+          }
         })
-        wx.setNavigationBarTitle({
-          title: '已购课程'
-        })
+        
         break;
       }
       case 3: {
-        this.setData({
-          selected3: "selected"
+        var that = this;
+        wx.showLoading({
+          title: '正在加载',
+          success:res=>{
+            that.setData({
+              selected3: "selected"
+            })
+            wx.setNavigationBarTitle({
+              title: '收藏课程'
+            })
+            that.getcollect();
+          }
         })
-        wx.setNavigationBarTitle({
-          title: '收藏课程'
-        })
+        
         break;
       }
 
@@ -53,7 +77,7 @@ Page({
   },
   //获取正在学习课程
   getstudying(){
-
+    wx.hideLoading();
   },
   //获取已购课程
   getbought:function(){
@@ -80,11 +104,13 @@ Page({
             duration: 2000
           })
         }
+        wx.hideLoading();
       }
     })
   },
   //获取收藏课程
   getcollect:function(){
+    wx.hideLoading();
   },
   //根据分类获取不同课程数据
   getlistdata:function(e){
@@ -93,12 +119,27 @@ Page({
     })
     switch(this.data.cla){
       case 1:
+        this.setData({
+          selected1: "selected",
+          selected2:"",
+          selected3: ""
+        });
         this.getstudying();
         break;
       case 2:
+        this.setData({
+          selected1: "",
+          selected2: "selected",
+          selected3: ""
+        });
         this.getbought();
         break;
       case 3:
+        this.setData({
+          selected1: "",
+          selected2: "",
+          selected3: "selected"
+        });
         this.getcollect();
         break;
 
@@ -113,6 +154,7 @@ Page({
       selected:parseInt(options.select)
     })
     this.getswitch(this.data.selected);
+    
     this.myList = this.selectComponent('#myList');
     
   },
