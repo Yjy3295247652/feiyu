@@ -30,7 +30,6 @@ Page({
       that.setData({
         qwer: true
       })
-
       wx.request({
         url: that.data.feiyu + '/phone/login/personSignIn',
         header: {
@@ -111,9 +110,9 @@ Page({
       that.setData({
         userInfomation: {
           nickname: "游客",
-          head_image: "",
-          phone: "000****0000"
-        }
+          head_image: ""
+        },
+        phone: "000****0000"
       })
     }
   },
