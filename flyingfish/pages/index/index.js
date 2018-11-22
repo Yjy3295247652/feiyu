@@ -56,7 +56,7 @@ Page({
   // 获取方向
   getDirection() {
     wx.request({
-      url: this.data.feiyu + '/phone/findDirectionAndClass',
+      url: this.data.feiyu + '/phone/course/findDirectionAndClass',
       header: {
         "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
       },
@@ -79,7 +79,7 @@ Page({
         classfy: false
       })
       wx.request({
-        url: this.data.feiyu + '/phone/findCourse?directionId=' + directionId + '&classfyId=' + classfyId,
+        url: this.data.feiyu + '/phone/course/findCourse?directionId=' + directionId + '&classfyId=' + classfyId,
         header: {
           "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
         },
@@ -105,7 +105,7 @@ Page({
   // 获取轮播图
   getBanner() {
     wx.request({
-      url: this.data.feiyu + '/phone/findCarouse',
+      url: this.data.feiyu + '/phone/course/findCarouse',
       header: {
         "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
       },
