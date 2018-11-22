@@ -3,9 +3,9 @@
 <view class='my'>
   <view class='head'>
     <image src='{{userInfomation.head_image}}' />
-  </view>
+  </view> 
   <view class='message'>
-    <view class='name' bindtap='toLogin'>游客{{userInfomation.nickname}}</view>
+    <view class='name' bindtap='toLogin'>{{userInfomation.nickname}}</view>
     <view class='id'>
       <view class="leiji">累计积分：</view>
       <text>{{integral}}</text>

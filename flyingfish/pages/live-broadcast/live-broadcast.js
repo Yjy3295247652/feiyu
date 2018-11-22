@@ -12,7 +12,8 @@ Page({
     videoAddress: null,
     flag: true,
     bottomShow: false,
-    isChecked:''
+    isChecked: '',
+    collectText: 0
   },
   navbarTap: function(e) {
     this.setData({
@@ -36,8 +37,11 @@ Page({
   getlistdata() {
     wx.request({
       url: this.data.feiyu + '/phone/course/course_chapter?courseId=' + this.data.courseId,
-      header: { "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId") },
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+      },
       success: res => {
+        console.log(res.data)
         if (res.data) {
           this.setData({
             listdata: res.data
@@ -62,6 +66,9 @@ Page({
       },
       success(res) {
         console.log(res.data)
+        this.setData({
+          collectText: 1
+        })
       }
     })
   },
@@ -76,6 +83,9 @@ Page({
         courseId: this.data.courseId
       },
       success(res) {
+        this.setData({
+          collectText: 0
+        })
         console.log(res.data)
       }
     })
@@ -131,7 +141,7 @@ Page({
    */
   onReachBottom: function() {
     this.setData({
-      bottomShow:true
+      bottomShow: true
     })
   },
 
