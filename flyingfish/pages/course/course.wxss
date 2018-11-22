@@ -1,0 +1,22 @@
+.course{
+  width: 100vw;
+  height: 100vh;
+}
+.navibar{
+  width: 100vw;
+  height: 100rpx;
+  background: #DDF0ED;
+  display: flex;
+  justify-content: space-around;
+}
+.navibar view{
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: #4cb4e7;
+  box-sizing: border-box;
+}
+.selected{
+  border-bottom: 1px solid #4cb4e7;
+}

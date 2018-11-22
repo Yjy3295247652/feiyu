@@ -17,6 +17,30 @@ Page({
     num: 0,
     classfy: false
   },
+  //已购买页面
+  getbought:function(){
+    wx.request({
+      url: this.data.feiyu +'/phone/course/buyedCourse',
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+      },
+      method:"GET",
+      success:res=>{
+        console.log(res);
+        if(res.data.code !== 0){
+          wx.showToast({
+            title: '服务器错误',
+            icon:'none',
+            duration:2000
+          })
+        }else if(res.data.code == 0){
+          wx.navigateTo({
+            url: '../course/course',
+          })
+        }
+      }
+    })
+  },
   // 切换方向
   navbarTap: function(e) {
     this.setData({

@@ -23,5 +23,8 @@
       </view>
     </block>
   </block>
-
+  <view class="bought" bindtap="getbought">
+    <view class="yigou yigou1">已购买</view>
+    <view class="yigou yigou2">课程</view>
+  </view>
 </view>

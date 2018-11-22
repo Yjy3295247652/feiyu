@@ -100,11 +100,9 @@ Page({
         },
         success(res) {
           console.log(res);
-          var li1 = res.data.userInfo.phone.substring(0, 3);
-          var li2 = res.data.userInfo.phone.substring(8, 12);
           that.setData({
             userInfomation: res.data.userInfo,
-            phone: li1 + "****" + li2
+            integral:res.data.integral.integralNumber
           })
         }
       })
@@ -114,7 +112,7 @@ Page({
           nickname: "游客",
           head_image: ""
         },
-        phone: "000****0000"
+        integral:0
       })
     }
   },

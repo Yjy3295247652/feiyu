@@ -58,3 +58,39 @@
   color: #6eafdc;
   font-size: 30rpx;
 }
+.bought{
+  width: 180rpx;
+  height: 180rpx;
+  position: fixed;
+  right:20rpx;
+  bottom:60rpx;
+  z-index: 999;
+  border-radius: 50%;
+  background-color:#4cb3e794;
+  text-align: center;
+  animation: run 5 ease-in-out infinite;
+}
+@keyframes run{
+            0%{
+                transform: scale(1);  
+            }
+            25%{
+                transform: scale(1.5); 
+            }
+            50%{
+                transform: scale(1);
+            }
+            75%{
+                transform: scale(1.5);
+            }
+}
+.yigou{
+  color:#fff;
+  font-size: 36rpx;
+}
+.yigou1{
+  margin-top:36rpx;
+}
+.yigou2{
+  margin-top:10rpx;
+}

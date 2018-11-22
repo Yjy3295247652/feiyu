@@ -1,0 +1,7 @@
+<view class="course">
+  <view class="navibar">
+    <view class="selected">正在学习</view>
+    <view>已购课程</view>
+    <view>收藏课程</view>
+  </view>
+</view>
