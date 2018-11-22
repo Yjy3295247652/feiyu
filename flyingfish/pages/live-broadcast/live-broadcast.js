@@ -13,7 +13,8 @@ Page({
     flag: true,
     bottomShow: false,
     isChecked: '',
-    collectText: 0
+    collectText: 0,
+    isBuy:''
   },
   navbarTap: function(e) {
     this.setData({
@@ -41,10 +42,11 @@ Page({
         "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
       },
       success: res => {
-        console.log(res.data)
         if (res.data) {
           this.setData({
-            listdata: res.data
+            listdata: res.data,
+            collectText: res.data.collectflag,
+            isBuy: res.data.isBuy
           })
         }
       }
@@ -56,37 +58,37 @@ Page({
   },
   // 获取收藏课程
   getCollectCourse() {
+    var that = this;
     wx.request({
       url: this.data.feiyu + '/phone/course/course_collect',
       header: {
         "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
       },
       data: {
-        courseId: this.data.courseId
+        courseId: that.data.courseId
       },
       success(res) {
-        console.log(res.data)
-        this.setData({
-          collectText: 1
+        that.setData({
+          collectText: true
         })
       }
     })
   },
   // 取消收藏
   unCollect(e) {
+    var that = this;
     wx.request({
-      url: this.data.feiyu + '/phone/course/course_uncollect',
+      url: that.data.feiyu + '/phone/course/course_uncollect',
       header: {
         "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
       },
       data: {
-        courseId: this.data.courseId
+        courseId: that.data.courseId
       },
       success(res) {
-        this.setData({
-          collectText: 0
+        that.setData({
+          collectText: false
         })
-        console.log(res.data)
       }
     })
   },
