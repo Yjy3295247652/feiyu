@@ -12,7 +12,9 @@ Page({
     videoAddress: null,
     flag: true,
     bottomShow: false,
-    isChecked:''
+    isChecked: '',
+    collectText: 0,
+    isBuy:''
   },
   navbarTap: function(e) {
     this.setData({
@@ -36,11 +38,15 @@ Page({
   getlistdata() {
     wx.request({
       url: this.data.feiyu + '/phone/course/course_chapter?courseId=' + this.data.courseId,
-      header: { "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId") },
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+      },
       success: res => {
         if (res.data) {
           this.setData({
-            listdata: res.data
+            listdata: res.data,
+            collectText: res.data.collectflag,
+            isBuy: res.data.isBuy
           })
         }
       }
@@ -52,31 +58,37 @@ Page({
   },
   // 获取收藏课程
   getCollectCourse() {
+    var that = this;
     wx.request({
       url: this.data.feiyu + '/phone/course/course_collect',
       header: {
         "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
       },
       data: {
-        courseId: this.data.courseId
+        courseId: that.data.courseId
       },
       success(res) {
-        console.log(res.data)
+        that.setData({
+          collectText: true
+        })
       }
     })
   },
   // 取消收藏
   unCollect(e) {
+    var that = this;
     wx.request({
-      url: this.data.feiyu + '/phone/course/course_uncollect',
+      url: that.data.feiyu + '/phone/course/course_uncollect',
       header: {
         "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
       },
       data: {
-        courseId: this.data.courseId
+        courseId: that.data.courseId
       },
       success(res) {
-        console.log(res.data)
+        that.setData({
+          collectText: false
+        })
       }
     })
   },
@@ -131,7 +143,7 @@ Page({
    */
   onReachBottom: function() {
     this.setData({
-      bottomShow:true
+      bottomShow: true
     })
   },
 
