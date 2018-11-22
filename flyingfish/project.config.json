@@ -37,18 +37,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
 					"name": "my",
 					"pathName": "pages/my/my",
-					"query": ""
-				},
-				{
-					"id": 1,
-					"name": "purchasedCourses",
-					"pathName": "pages/purchasedCourses/purchasedCourses",
 					"query": ""
 				},
 				{
@@ -58,8 +52,8 @@
 					"query": ""
 				},
 				{
-					"id": 3,
-					"name": "v",
+					"id": -1,
+					"name": "room",
 					"pathName": "pages/videoroom/videoroom",
 					"query": ""
 				}

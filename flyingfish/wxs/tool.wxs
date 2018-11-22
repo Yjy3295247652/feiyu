@@ -3,10 +3,10 @@ var getTime = function(product) {
   var year = data.getFullYear();
   var month = data.getMonth() + 1;
   var date = data.getDate();
-  var hour = data.getHours();
-  var minute = data.getMinutes();
-  var second = data.getSeconds();
-  return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+  // var hour = data.getHours();
+  // var minute = data.getMinutes();
+  // var second = data.getSeconds();
+  return year + "-" + month + "-" + date;
 }
 
 module.exports = {

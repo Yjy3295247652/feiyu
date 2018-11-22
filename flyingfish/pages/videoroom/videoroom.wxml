@@ -1,15 +1,42 @@
+<wxs src="../../wxs/tool.wxs" module="tool" />
 <view>
   <view class="section tc">
-  <video id="myVideo" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" danmu-list="{{danmuList}}" enable-danmu danmu-btn controls></video>
-  <view class='liuyan'>
-
-  </view>
-  <view class="btn-area">
-    <!-- <button bindtap="bindButtonTap">获取视频</button> -->
-    <view class='bottom'>
-      <input bindblur="bindInputBlur" placeholder='发送消息' placeholder-style="font-size:30rpx;" focus />
-      <view bindtap="bindSendDanmu" class='danmu'></view>
+    <video id="myVideo" src="{{src}}" wx:if="{{src}}" controls autoplay='true'></video>
+    <view class='liuyan'>
+      <view class='list' wx:for="{{commentAndReply}}" wx:key="{{index}}">
+        <view class='list-img'>
+          <image src="{{item.comment.head_image}}"></image>
+        </view>
+        <view class='list-content'>
+          <view class='list-name'>
+            <view class='name'>{{item.comment.nickName}}</view>
+            <view class='time'>{{tool.getTime(item.comment.updateTime)}}</view>
+          </view>
+          <view class='list-text'>
+            <view class='text'>{{item.comment.content}}</view>
+          </view>
+          <view class='icon'>
+            <view class='huifu'></view>
+            <view class='zan'>
+              <view class='zan-icon'></view>
+              <text>{{item.comment.good}}</text>
+            </view>
+          </view>
+          <view class='list-huifu' wx:for="{{item.reply}}" wx:key="{{index}}">
+            <view class='h'>
+              <text class='one'>{{item.replyUserName}}</text>
+              <text>回复：</text>
+              <text class='last'>{{item.reply}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="btn-area">
+      <form class='bottom'>
+        <input bindblur="bindInputBlur" placeholder='发送消息' placeholder-style="font-size:30rpx;" focus />
+        <button bindtap="bindSendDanmu" class='danmu' formType="reset"></button>
+      </form>
     </view>
   </view>
-</view>
 </view>

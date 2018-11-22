@@ -41,13 +41,6 @@
     <view slot="right" class='r'>
       <view class='delete' bindtap="deleteList" data-index="{{index}}">
         <view class='deleteZi'><text>取消收藏</text></view>
-<<<<<<< HEAD
-        <!-- <view class='deleteZi'><text>删除购买</text></view>
-        <view class='deleteZi'><text>删除记录</text></view> -->
-=======
-        <!-- <view class='deleteZi'><text>删除购买</text></view> -->
-        <!-- <view class='deleteZi'><text>删除记录</text></view> -->
->>>>>>> b652e68662088f9a107455e2f3b9f1bf6fc9884f
       </view>
     </view>
   </slide-view>

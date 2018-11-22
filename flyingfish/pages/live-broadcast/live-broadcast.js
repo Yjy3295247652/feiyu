@@ -25,7 +25,7 @@ Page({
       feiyu: feiyu
     })
   },
-
+  // 去播放视频
   getVideo(e) {
     this.setData({
       videoId: e.currentTarget.dataset.id,
