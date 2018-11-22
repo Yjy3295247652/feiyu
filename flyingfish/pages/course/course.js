@@ -110,6 +110,17 @@ Page({
   },
   //获取收藏课程
   getcollect:function(){
+    wx.request({
+      url: this.data.feiyu+'/phone/center/personalCenter_collect_course',
+      header:{
+        "Cookie":"JSESSIONID="+wx.getStorageSync("sessionId")
+      },
+      method:"get",
+      success:res=>{
+        console.log(res);
+      }
+
+    })
     wx.hideLoading();
   },
   //根据分类获取不同课程数据
