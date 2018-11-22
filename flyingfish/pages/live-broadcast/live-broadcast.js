@@ -35,7 +35,7 @@ Page({
   },
   getlistdata() {
     wx.request({
-      url: this.data.feiyu + '/phone/course_chapter?courseId=' + this.data.courseId,
+      url: this.data.feiyu + '/phone/course/course_chapter?courseId=' + this.data.courseId,
       header: { "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId") },
       success: res => {
         if (res.data) {
