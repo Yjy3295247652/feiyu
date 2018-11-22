@@ -1,4 +1,3 @@
-
 <video wx:if="{{flag}}" id="myVideo" class='video' src="{{videoAddress}}" binderror="videoErrorCallback" controls direction="90" autoplay="true"></video>
 <video wx:if="{{!flag}}" id="myVideo" class='video' src="{{videoAddress}}" binderror="videoErrorCallback" controls direction="90" autoplay="true"></video>
 
@@ -33,10 +32,10 @@
               </view>
             </view>
           </view>
-          <block>
-            <view class="jie" wx:for="{{item.section}}" wx:key="{{index}}">
-              <view class='icon-jiao'></view>
-              <view class='jie-dian' bindtap='getVideo' data-address="{{item}}">{{item.chapter_name}}</view>
+          <block wx:for="{{item.section}}" wx:key="{{index}}">
+            <view class="jie {{isChecked==item.id?'is_checked':''}}" bindtap='getVideo' data-address="{{item}}" data-id="{{item.id}}">
+              <view class="icon-jiao {{isChecked==item.id?'is_checked':''}}"></view>
+              <view class="jie-dian">{{item.chapter_name}}</view>
             </view>
           </block>
         </block>
