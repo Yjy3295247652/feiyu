@@ -3,5 +3,9 @@
     "myList": "/components/myList/myList"
   },
   "navigationBarTitleText": "已收藏课程",
+<<<<<<< HEAD
+  "enablePullDownRefresh":false
+=======
   "enablePullDownRefresh": false
+>>>>>>> b652e68662088f9a107455e2f3b9f1bf6fc9884f
 }

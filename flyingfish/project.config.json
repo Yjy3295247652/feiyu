@@ -58,9 +58,9 @@
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "my",
-					"pathName": "pages/collectedCourses/collectedCourses",
+					"id": 3,
+					"name": "v",
+					"pathName": "pages/videoroom/videoroom",
 					"query": ""
 				}
 			]
