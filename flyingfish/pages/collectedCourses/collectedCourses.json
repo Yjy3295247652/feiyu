@@ -2,5 +2,6 @@
   "usingComponents": {
     "myList": "/components/myList/myList"
   },
-  "navigationBarTitleText": "已收藏课程"
+  "navigationBarTitleText": "已收藏课程",
+  "enablePullDownRefresh":false
 }

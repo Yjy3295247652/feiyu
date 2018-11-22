@@ -98,15 +98,6 @@ Page({
           "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
         },
         success(res) {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-          console.log(res);
->>>>>>> 50fc6d6e8f3efab2ee8c424e13fe998647fda63f
-          var li1 = res.data.userInfo.phone.substring(0, 3);
-          var li2 = res.data.userInfo.phone.substring(8, 12);
->>>>>>> c84ad4e13e0b2575682d625a4d5e3e03e4d8993b
           that.setData({
             userInfomation: res.data.userInfo
           })

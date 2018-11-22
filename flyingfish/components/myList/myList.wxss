@@ -124,25 +124,3 @@
   display: flex;
   flex-direction: row;
 }
-
-.r {
-  height: 242rpx;
-  display: flex;
-  direction: row;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 242rpx;
-}
-
-.delete {
-  background-color: red;
-  color: #fff;
-  width: 150rpx;
-  display: flex;
-  justify-content: center;
-}
-.delete .deleteZi{
-  width:100%;
-  height: 100%;
-  font-size: 30rpx;
-}

@@ -41,8 +41,8 @@
     <view slot="right" class='r'>
       <view class='delete' bindtap="deleteList" data-index="{{index}}">
         <view class='deleteZi'><text>取消收藏</text></view>
-        <view class='deleteZi'><text>删除购买</text></view>
-        <view class='deleteZi'><text>删除记录</text></view>
+        <!-- <view class='deleteZi'><text>删除购买</text></view>
+        <view class='deleteZi'><text>删除记录</text></view> -->
       </view>
     </view>
   </slide-view>
