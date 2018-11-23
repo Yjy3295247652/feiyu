@@ -1,4 +1,7 @@
 {
+  "window": {
+    "disableScroll":true
+  },
   "usingComponents":{
     "myList":"/components/myList/myList"
   }
