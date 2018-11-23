@@ -7,7 +7,6 @@ function getRandomColor() {
   }
   return '#' + rgb.join('')
 }
-
 // pages/videoroom/videoroom.js
 Page({
   /**
