@@ -2,6 +2,7 @@
 <view>
   <view class="section tc">
     <video id="myVideo" src="{{src}}" wx:if="{{src}}" controls autoplay='true'></video>
+    <view class='chapter_name'>{{chapter.chapter_name}}</view>
     <view class='liuyan'>
       <view class='list' wx:for="{{commentAndReply}}" wx:key="{{index}}">
         <view class='list-img'>
@@ -28,6 +29,7 @@
         </view>
       </view>
     </view>
+    <view class='di'></view>
     <view class="btn-area">
       <form class='bottom'>
         <input bindblur="bindInputBlur" placeholder='发送消息' placeholder-style="font-size:30rpx;" focus />
