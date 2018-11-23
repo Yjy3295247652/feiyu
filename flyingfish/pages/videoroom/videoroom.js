@@ -32,6 +32,7 @@ Page({
     isCommen:false,
     commenText:"",
     scrollTop:0,
+    isLike:true
   },
   //获取域名
   getname() {
@@ -45,6 +46,7 @@ Page({
     this.setData({
       text: e.detail.value.trim()
     })
+    this.bindSendDanmu();
   },
   //发送按钮点击
   bindSendDanmu: function(e) {
@@ -233,6 +235,11 @@ Page({
     time = 0;
   },
   like(e){
+    console.log(this.data.isLike);
+    if (!this.data.isLike){
+      return;
+    }
+    this.data.isLike = false;
     let id = e.currentTarget.dataset.id;
     let that = this;
     let commentAndReply = that.data.commentAndReply;
@@ -248,6 +255,7 @@ Page({
         commentId:id
       },
       success(res){
+        // that.data.isLike = true;        
         if (res.data.msg == "点赞成功"){
           commentAndReply[e.currentTarget.dataset.index].comment.isGood = true;
           commentAndReply[e.currentTarget.dataset.index].comment.good = res.data.good;
@@ -285,6 +293,14 @@ Page({
     });
   },
   comment1(e){
+    let that = this;
+    that.setData({
+      isCommen: false,
+      commenText: e.detail.value.trim()
+    });
+    this.send();
+  },
+  comment2(e){
     let that = this;
     that.setData({
       isCommen: false,

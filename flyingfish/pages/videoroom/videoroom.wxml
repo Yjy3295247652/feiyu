@@ -33,8 +33,7 @@
     <view class='no-reply' wx:else>暂无评论，快来评论~~~</view>
     <view class="btn-area">
       <form class='bottom'>
-        <input bindblur="bindInputBlur" placeholder='发表评论' placeholder-style="font-size:30rpx;" />
-        <button bindtap="bindSendDanmu" class='danmu' formType="reset"></button>
+        <input bindconfirm='bindInputBlur' placeholder='发表评论' placeholder-style="font-size:30rpx;" value='{{text}}'/>
       </form>
     </view>
     <view class='all-reply' wx:if="{{flag==1}}" bindtouchstart="touchStart" bindtouchend="touchEnd">
@@ -55,7 +54,7 @@
             <view class='des-bottom'>{{reply.comment.content}}</view>
             <view class='reply-list' wx:if='{{reply.reply.length}}'>
               <view class='list-item' wx:for="{{reply.reply}}" wx:key="{{index}}">
-                <text class='user-name'>{{item.replyUserName}}</text>：
+                <text class='user-name'>{{item.userName}}</text>：
                 <text>{{item.reply}}</text>
               </view>
             </view>
@@ -65,8 +64,7 @@
       </scroll-view>
       <view class="btn-area" hidden='{{!isCommen}}'>
         <form class='bottom'>
-          <input bindblur='comment1' placeholder='输入回复内容' placeholder-style="font-size:30rpx;" focus='{{isCommen}}' value='{{commenText}}' />
-          <button class='danmu' bindtap='send'></button>
+          <input bindblur='comment2' bindconfirm='comment1' placeholder='输入回复内容' placeholder-style="font-size:30rpx;" focus='{{isCommen}}' value='{{commenText}}' />
         </form>
       </view>
     </view>

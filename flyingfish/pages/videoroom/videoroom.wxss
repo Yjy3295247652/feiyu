@@ -1,6 +1,6 @@
 #myVideo {
   width: 100%;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   background: #000;
