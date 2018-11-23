@@ -174,10 +174,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getname();
-    this.getDirection();
-    this.getCurriculum();
-    this.getBanner()
+    wx.showLoading({
+      title: '正在加载',
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -190,7 +189,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    
+    this.getname();
+    this.getDirection();
+    this.getCurriculum();
+    this.getBanner();
+    wx.hideLoading();
   },
 
   /**

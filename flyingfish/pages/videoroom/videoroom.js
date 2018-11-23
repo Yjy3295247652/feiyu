@@ -94,11 +94,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getname()
+    wx.showLoading({
+      title: '正在加载',
+    })
     this.setData({
       chapterId: options.videoId
     })
-    this.getChapterCommentList()
   },
 
   /**
@@ -112,12 +113,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.getname()
+    
+    this.getChapterCommentList()
     var that = this;
     setTimeout(function() {
       that.setData({
         src: that.data.chapter.video_address
       })
     }, 500)
+    wx.hideLoading();
   },
 
   /**
