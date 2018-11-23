@@ -1,9 +1,10 @@
 <wxs src="../../wxs/tool.wxs" module="tool" />
 <view>
   <view class="section tc">
-    <video id="myVideo" src="{{src}}" wx:if="{{src}}" controls autoplay='true'></video>
-    <view class='chapter_name'>{{chapter.chapter_name}}</view>
-    <view class='liuyan'>
+    <view class='myVideo'>
+      <video id="myVideo" src="{{src}}" wx:if="{{src}}" controls autoplay='true'></video>
+    </view>
+    <view class='liuyan' wx:if='{{commentAndReply.length}}'>
       <view class='list' wx:for="{{commentAndReply}}" wx:key="{{index}}">
         <view class='list-img'>
           <image src="{{item.comment.head_image}}"></image>
@@ -17,24 +18,57 @@
             <view class='text'>{{item.comment.content}}</view>
           </view>
           <view class='icon'>
-            <view class='zan'>
+            <view class='zan' bindtap='getReply' data-index="{{index}}" data-reply="{{item}}">
               <view class='huifu'></view>
               <text>{{item.reply.length}}</text>
             </view>
-            <view class='zan'>
-              <view class="zan-icon"></view>
+            <view class='zan' catchtap='like' data-isgood="{{item.comment.isGood}}" data-index="{{index}}" data-id="{{item.comment.id}}">
+              <view class='zan-icon {{item.comment.isGood?"zan-icon1":"zan-icon2"}}'></view>
               <text>{{item.comment.good}}</text>
             </view>
           </view>
         </view>
       </view>
     </view>
-    <view class='di'></view>
+    <view class='no-reply' wx:else>暂无评论，快来评论~~~</view>
     <view class="btn-area">
       <form class='bottom'>
-        <input bindblur="bindInputBlur" placeholder='发送消息' placeholder-style="font-size:30rpx;" />
+        <input bindblur="bindInputBlur" placeholder='发表评论' placeholder-style="font-size:30rpx;" />
         <button bindtap="bindSendDanmu" class='danmu' formType="reset"></button>
       </form>
+    </view>
+    <view class='all-reply' wx:if="{{flag==1}}" bindtouchstart="touchStart" bindtouchend="touchEnd">
+      <scroll-view scroll-y style='height:100%;' scroll-top="{{scrollTop}}" scroll-with-animation="true">
+        <view class='main' id="all-reply-main">
+          <image src='{{reply.comment.head_image}}'></image>
+          <view class='des'>
+            <view class='des-top'>
+              <text class='user-name'>{{reply.comment.nickName}}</text>
+              <view class='reply-all-icon'>
+                <view class='zan' catchtap='like' data-isgood="{{reply.comment.isGood}}" data-index="{{reply.index}}" data-id="{{reply.comment.id}}">
+                  <view class='zan-icon {{reply.comment.isGood?"zan-icon1":"zan-icon2"}}'></view>
+                  <text>{{reply.comment.good}}</text>
+                </view>
+                <view class='reply-btn' bindtap='comment'></view>
+              </view>
+            </view>
+            <view class='des-bottom'>{{reply.comment.content}}</view>
+            <view class='reply-list' wx:if='{{reply.reply.length}}'>
+              <view class='list-item' wx:for="{{reply.reply}}" wx:key="{{index}}">
+                <text class='user-name'>{{item.replyUserName}}</text>：
+                <text>{{item.reply}}</text>
+              </view>
+            </view>
+            <view class='no-reply' wx:else>暂无回复~~~</view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="btn-area" hidden='{{!isCommen}}'>
+        <form class='bottom'>
+          <input bindblur='comment1' placeholder='输入回复内容' placeholder-style="font-size:30rpx;" focus='{{isCommen}}' value='{{commenText}}' />
+          <button class='danmu' bindtap='send'></button>
+        </form>
+      </view>
     </view>
   </view>
 </view>
