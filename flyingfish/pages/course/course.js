@@ -155,7 +155,7 @@ Page({
             wx.showToast({
               title: '还未购买任何课程~~',
               icon: 'none',
-              duration: 3000
+              duration: 1000
             })
           }else{
             let arr = res.data.buyedCoursesList;
@@ -172,7 +172,7 @@ Page({
           wx.showToast({
             title: '服务器错误',
             icon: 'none',
-            duration: 2000
+            duration: 1000
           })
         }
         wx.hideLoading();
@@ -195,6 +195,7 @@ Page({
           },
           method: "get",
           success: res => {
+            console.log(res);
             if(res.data.code == 0)
             {
               var arr = res.data.courseList;

@@ -66,7 +66,7 @@ Component({
 
                 }
                 this.setData({
-                  coursedata: list,
+                  listdata: list,
                   selected: 3
                 })
                 wx.hideLoading();
@@ -87,18 +87,19 @@ Component({
     },
     deleteList(e) {
       console.log(e);
-      const courseId = e.currentTarget.dataset.index;
+      const courseId = e.currentTarget.dataset.courseid;
       console.log(courseId);
       wx.request({
-        url: this.data.feiyu+'/phone/course/course_collect?courseId='+courseId,
+        url: this.data.feiyu+'/phone/course/course_uncollect?courseId='+courseId,
         method:"get",
         header:{
           "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
         },
         success:res=>{
+          console.log(res);
           if(res.data.code == 0){
             this.setData({
-              coursedata:[]
+              listdata:[]
             })
             this.getcollect();
           }

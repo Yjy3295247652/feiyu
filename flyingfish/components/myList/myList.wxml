@@ -37,7 +37,7 @@
         </view>
       </view>
       <view wx:if="{{selected == 3}}" slot="right" class='r'>
-          <view class='delete' bindtap="deleteList" data-index="{{index}}">
+          <view class='delete' bindtap="deleteList" data-courseId="{{item.courseId}}">
             <!-- 取消收藏 -->
             <view class='deleteZi'>
               取消收藏
