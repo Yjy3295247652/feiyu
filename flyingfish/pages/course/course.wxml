@@ -10,7 +10,9 @@
   <scroll-view scroll-y style="width:100vw;height:calc(100vh - 100rpx);">
     <myList
     hasright="收藏"
-    listdata="{{}}"
+    listdata="{{coursedata}}"
+    feiyu="{{feiyu}}"
+    selected="{{selected}}"
     ></myList>
   </scroll-view>
 </view>

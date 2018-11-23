@@ -34,42 +34,6 @@
 		},
 		"game": {
 			"list": []
-		},
-		"miniprogram": {
-<<<<<<< HEAD
-			"current": -1,
-=======
-			"current": 3,
->>>>>>> 8afc99fb59dc3363765ffafeb0e7400667298ae4
-			"list": [
-				{
-					"id": -1,
-					"name": "my",
-					"pathName": "pages/my/my",
-					"query": ""
-				},
-				{
-					"id": 1,
-					"name": "broadcast",
-					"pathName": "pages/live-broadcast/live-broadcast",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "index",
-					"pathName": "pages/index/index",
-					"query": ""
-<<<<<<< HEAD
-=======
-				},
-				{
-					"id": 3,
-					"name": "v",
-					"pathName": "pages/videoroom/videoroom",
-					"query": ""
->>>>>>> 8afc99fb59dc3363765ffafeb0e7400667298ae4
-				}
-			]
 		}
 	}
 }
