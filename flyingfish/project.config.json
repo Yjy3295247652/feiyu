@@ -34,10 +34,6 @@
 		},
 		"game": {
 			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": []
 		}
 	}
 }

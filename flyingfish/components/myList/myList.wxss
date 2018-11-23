@@ -21,7 +21,6 @@
   width: 301rpx;
   height: 195rpx;
   margin-right: 28rpx;
-  background: #89d0e0;
 }
 
 .li_pic image {
@@ -34,19 +33,10 @@
   height: 194rpx;
   padding-right: 24rpx;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
 }
 
 .li_content_top {
   width: 100%;
-  height: 148rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
 }
 
 .h1 {
@@ -92,13 +82,10 @@
   right: 0;
 }
 .price{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  font-size: 20rpx;
+  margin-top:20rpx;
+  font-size: 24rpx;
   color: #e5636c;
   display: flex;
-  justify-content: flex-end;
   align-items: flex-end;
   line-height: 30rpx;
 }
@@ -106,7 +93,7 @@
   line-height: 26rpx;
 }
 .price_number{
-  font-size: 30rpx;
+  font-size: 24rpx;
 }
 
 .baseline{
@@ -145,4 +132,9 @@
   line-height: 50rpx;
   padding-top:20rpx;
   box-sizing: border-box;
+}
+.span{
+  font-size:24rpx;
+  color:#666;
+  margin-top:20rpx;
 }
