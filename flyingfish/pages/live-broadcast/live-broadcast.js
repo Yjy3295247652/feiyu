@@ -9,12 +9,10 @@ Page({
     currentTab: 0,
     listdata: [],
     courseId: '',
-    videoAddress: null,
-    flag: true,
     bottomShow: false,
-    isChecked: '',
-    collectText: 0,
-    isBuy:''
+    videoId: '',
+    collectText: false,
+    isBuy: ''
   },
   navbarTap: function(e) {
     this.setData({
@@ -27,34 +25,57 @@ Page({
       feiyu: feiyu
     })
   },
+  // 去播放视频
   getVideo(e) {
     this.setData({
-      videoAddress: e.currentTarget.dataset.address.video_address,
-      flag: !this.data.flag,
-      isChecked: e.currentTarget.dataset.id,
+      videoId: e.currentTarget.dataset.id,
     })
-    this.getlistdata();
+    wx.navigateTo({
+      url: '/pages/videoroom/videoroom?videoId=' + this.data.videoId,
+    })
   },
+  // 获取视频列表信息
   getlistdata() {
-    wx.request({
-      url: this.data.feiyu + '/phone/course/course_chapter?courseId=' + this.data.courseId,
-      header: {
-        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
-      },
-      success: res => {
-        if (res.data) {
-          this.setData({
-            listdata: res.data,
-            collectText: res.data.collectflag,
-            isBuy: res.data.isBuy
-          })
-        }
+    if (this.data.price) {
+      var openId = wx.getStorageSync("openId")
+      if (openId) {
+        wx.request({
+          url: this.data.feiyu + '/phone/course/course_chapter?courseId=' + this.data.courseId,
+          header: {
+            "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+          },
+          success: res => {
+            if (res.data) {
+              this.setData({
+                listdata: res.data,
+                collectText: res.data.collectflag,
+                isBuy: res.data.isBuy
+              })
+            }
+          }
+        })
+      } else {
+        wx.reLaunch({
+          url: '../login/login',
+        })
       }
-    })
-  },
-  videoErrorCallback: function(e) {
-    console.log('视频错误信息:')
-    console.log(e.detail.errMsg)
+    } else {
+      wx.request({
+        url: this.data.feiyu + '/phone/course/course_chapter?courseId=' + this.data.courseId,
+        header: {
+          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        },
+        success: res => {
+          if (res.data) {
+            this.setData({
+              listdata: res.data,
+              collectText: res.data.collectflag,
+              isBuy: res.data.isBuy
+            })
+          }
+        }
+      })
+    }
   },
   // 获取收藏课程
   getCollectCourse() {
@@ -70,6 +91,9 @@ Page({
       success(res) {
         that.setData({
           collectText: true
+        })
+        wx.showToast({
+          title: '收藏成功',
         })
       }
     })
@@ -88,6 +112,10 @@ Page({
       success(res) {
         that.setData({
           collectText: false
+        })
+        wx.showToast({
+          title: '已取消收藏',
+          icon: 'none'
         })
       }
     })

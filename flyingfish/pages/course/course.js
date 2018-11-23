@@ -77,6 +77,24 @@ Page({
   },
   //获取正在学习课程
   getstudying(){
+    wx.request({
+      url: this.data.feiyu +'/phone/center/personalCenter_learning?page=1',
+      header:{
+        "Cookie":"JSESSIONID="+wx.getStorageSync("sessionId")
+      },
+      success:res=>{
+        console.log(res);
+        if(res.data.code == 0){
+          
+        }else{
+          wx.showToast({
+            title: '服务器错误',
+            icon:'none'
+          })
+        }
+      }
+
+    })
     wx.hideLoading();
   },
   //获取已购课程

@@ -1,26 +1,26 @@
 <view>
   <view wx:for="{{listdata}}">
-  <slide-view class="slide" width="750" height="242" slideWidth="150">
-    <view slot="left" class='l'>
-      <view class='list-lis'>
-        <block>
-          <navigator class='list_lis_li' hover-class='none' url="">
-            <view class='li_pic'>
-              <image src=""></image>
-            </view>
-            <view class='li_content'>
-              <view class='li_content_top'>
-                <view class='h1'>名字</view>
-                <view class='time'>时间</view>
+    <slide-view class="slide" width="750" height="242" slideWidth="150">
+      <view slot="left" class='l'>
+        <view class='list-lis'>
+          <block>
+            <navigator class='list_lis_li' hover-class='none' url="">
+              <view class='li_pic'>
+                <image src=""></image>
               </view>
-              <view class='li_content_bottom'>
-                <block>
-                  <view class='span'>订单号</view>
-                  <view class='price'>
-                    <view class='price_text'>￥</view>
-                    <view class='price_number'>55</view>
-                  </view>
-                </block>
+              <view class='li_content'>
+                <view class='li_content_top'>
+                  <view class='h1'>名字</view>
+                  <view class='time'>时间</view>
+                </view>
+                <view class='li_content_bottom'>
+                  <block>
+                    <view class='span'>订单号</view>
+                    <view class='price'>
+                      <view class='price_text'>￥</view>
+                      <view class='price_number'>55</view>
+                    </view>
+                  </block>
                   <block>
                     <block wx:if="{{flag}}">
                       <view class='span'>已报名</view>
@@ -39,14 +39,21 @@
           </block>
         </view>
       </view>
-      <view wx:if="{{hasright == '收藏'}}" slot="right" class='r'>
+      <view slot="right" class='r'>
         <view class='delete' bindtap="deleteList" data-index="{{index}}">
-        <!-- 取消收藏 -->
           <view class='deleteZi'>
-            取消收藏
+            <text>取消收藏</text>
           </view>
         </view>
-    </view>
+        <view wx:if="{{hasright == '收藏'}}" slot="right" class='r'>
+          <view class='delete' bindtap="deleteList" data-index="{{index}}">
+            <!-- 取消收藏 -->
+            <view class='deleteZi'>
+              取消收藏
+            </view>
+          </view>
+        </view>
+      </view>
     </slide-view>
   </view>
 </view>

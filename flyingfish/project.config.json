@@ -14,10 +14,15 @@
 	"libVersion": "2.4.0",
 	"appid": "wx3c60d70dfaad4491",
 	"projectname": "feiyu",
+	"svr": "",
+	"client": "",
+	"qcloudRoot": "",
+	"miniprogramRoot": "",
+	"pluginRoot": "",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
-	"isGameTourist": false,
+	"scripts": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -32,22 +37,22 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 0,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "video",
 					"pathName": "pages/videoroom/videoroom",
-					"query": ""
+					"query": "videoId=17"
 				},
 				{
 					"id": -1,
 					"name": "index",
-					"pathName": "pages/index/index"
+					"pathName": "pages/index/index",
+					"query": ""
 				}
 			]
 		}
