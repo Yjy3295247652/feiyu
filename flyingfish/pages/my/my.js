@@ -40,6 +40,7 @@ Page({
             wx.showToast({
               title: '签到成功，加5积分',
             })
+            this.getUserInfomation();
             that.setData({
               isSignIn: "已签到"
             })
