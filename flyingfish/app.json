@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/login/login",
+    "pages/waiting/waiting",
     "pages/index/index",
     "pages/course/course",
     "pages/my/my",

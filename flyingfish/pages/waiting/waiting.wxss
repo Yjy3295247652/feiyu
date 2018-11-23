@@ -1,0 +1,8 @@
+.waiting{
+  width: 100vw;
+  height: 100vh;
+  line-height: 90vh;
+  text-align: center;
+  font-size: 36rpx;
+  color:#666;
+}
