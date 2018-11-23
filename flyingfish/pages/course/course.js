@@ -317,7 +317,38 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.stopPullDownRefresh();
+    var that = this;
+    wx.showLoading({
+      title: '加载',
+      success:res=>{
+        this.setData({
+          page:1
+        })
+        switch(this.data.selected){
+          case 1:
+            this.setData({
+              coursedata:[]
+            })
+            this.getstudying();
+            break;
+          case 2:
+            this.setData({
+              coursedata: []
+            })
+            this.getbought();
+            break;
+          case 3:
+            this.setData({
+              coursedata: []
+            })
+            this.getcollect();
+            break;
+        }
+        wx.hideLoading();
+        
+      }
+    })
   },
 
   /**
