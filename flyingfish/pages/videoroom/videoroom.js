@@ -50,7 +50,6 @@ Page({
         "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
       },
       success: function(res) {
-        console.log(res.data)
         that.getChapterCommentList();
       },
     })
