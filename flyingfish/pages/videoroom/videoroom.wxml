@@ -21,7 +21,7 @@
               <text>{{item.reply.length}}</text>
             </view>
             <view class='zan'>
-              <view class='zan-icon'></view>
+              <view class="zan-icon"></view>
               <text>{{item.comment.good}}</text>
             </view>
           </view>

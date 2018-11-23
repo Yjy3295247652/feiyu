@@ -36,47 +36,8 @@
 			"list": []
 		},
 		"miniprogram": {
-<<<<<<< HEAD
-			"current": 2,
-=======
-<<<<<<< HEAD
 			"current": -1,
-=======
-			"current": 3,
->>>>>>> 8afc99fb59dc3363765ffafeb0e7400667298ae4
->>>>>>> 09f9fd8fb4061bd029138207226942aefbd626d6
-			"list": [
-				{
-					"id": -1,
-					"name": "my",
-					"pathName": "pages/my/my",
-					"query": ""
-				},
-				{
-<<<<<<< HEAD
-=======
-					"id": 1,
-					"name": "broadcast",
-					"pathName": "pages/live-broadcast/live-broadcast",
-					"query": ""
-				},
-				{
->>>>>>> 09f9fd8fb4061bd029138207226942aefbd626d6
-					"id": -1,
-					"name": "index",
-					"pathName": "pages/index/index",
-					"query": ""
-<<<<<<< HEAD
-=======
-				},
-				{
-					"id": -1,
-					"name": "room",
-					"pathName": "pages/videoroom/videoroom",
-					"query": ""
->>>>>>> 8afc99fb59dc3363765ffafeb0e7400667298ae4
-				}
-			]
+			"list": []
 		}
 	}
 }
