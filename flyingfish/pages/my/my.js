@@ -38,7 +38,7 @@ Page({
         success(res) {
           if (res.data.code == 0) {
             wx.showToast({
-              title: '签到成功，加5积分',
+              title: '签到成功，加20积分',
             })
             that.setData({
               isSignIn: "已签到"
