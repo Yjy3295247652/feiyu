@@ -14,16 +14,12 @@ Page({
       feiyu: feiyu
     })
   },
-  
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-<<<<<<< HEAD
-
-=======
     this.getname();
->>>>>>> b652e68662088f9a107455e2f3b9f1bf6fc9884f
   },
 
   /**

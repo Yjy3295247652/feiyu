@@ -9,44 +9,64 @@ function getRandomColor() {
 }
 
 Page({
-  onReady: function (res) {
+  onReady: function(res) {
     this.videoContext = wx.createVideoContext('myVideo')
+    
   },
+  
   inputValue: '',
   data: {
+    content: [],
+    feiyu: '',
     src: '',
-    danmuList: [
-      {
-        text: '第 1s 出现的弹幕',
-        color: '#ff0000',
-        time: 1
+    asd: null
+  },
+  getname() {
+    var feiyu = getApp().globalData.host;
+    this.setData({
+      feiyu: feiyu
+    })
+  },
+  geta() {
+    var that = this;
+    wx.request({
+      url: this.data.feiyu + '/phone/course/chapterCommentList?chapterId=144',
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
       },
-      {
-        text: '第 3s 出现的弹幕',
-        color: '#ff00ff',
-        time: 3
-      }]
-  },
-  bindInputBlur: function (e) {
-    this.inputValue = e.detail.value
-  },
-  bindButtonTap: function () {
-    var that = this
-    wx.chooseVideo({
-      sourceType: ['album', 'camera'],
-      maxDuration: 60,
-      camera: ['front', 'back'],
-      success: function (res) {
+      success(res) {
+        console.log(res.data)
         that.setData({
-          src: res.tempFilePath
+          asd: res.data.chapter
         })
+        console.log(that.data.asd)
       }
     })
   },
-  bindSendDanmu: function () {
+  onLoad: function () {
+    this.getname();
+    this.geta();
+    
+  },
+  onShow:function(){
+    var that = this;
+    setTimeout(function () {
+      console.log(that.data.asd)
+      that.setData({
+        src: that.data.asd.video_address
+      })
+    }, 500)
+  },
+  bindInputBlur: function(e) {
+    this.inputValue = e.detail.value
+  },
+  bindSendDanmu: function() {
     this.videoContext.sendDanmu({
       text: this.inputValue,
       color: getRandomColor()
+    });
+    this.setData({
+      content: this.inputValue
     })
   }
 })
