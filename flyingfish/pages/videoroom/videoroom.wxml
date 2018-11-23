@@ -1,15 +1,38 @@
+<wxs src="../../wxs/tool.wxs" module="tool" />
 <view>
   <view class="section tc">
-    <video id="myVideo" src="{{src}}"wx:if="{{src}}" enable-danmu danmu-btn controls></video>
-    <view class='liuyan' wx-for="{{content}}">
-        <view>{{}}</view>
+    <video id="myVideo" src="{{src}}" wx:if="{{src}}" controls autoplay='true'></video>
+    <view class='liuyan'>
+      <view class='list' wx:for="{{commentAndReply}}" wx:key="{{index}}">
+        <view class='list-img'>
+          <image src="{{item.comment.head_image}}"></image>
+        </view>
+        <view class='list-content'>
+          <view class='list-name'>
+            <view class='name'>{{item.comment.nickName}}</view>
+            <view class='time'>{{tool.getTime(item.comment.updateTime)}}</view>
+          </view>
+          <view class='list-text'>
+            <view class='text'>{{item.comment.content}}</view>
+          </view>
+          <view class='icon'>
+            <view class='zan' data-reply="{{item.reply}}" bindtap="getReply">
+              <view class='huifu'></view>
+              <text>{{item.reply.length}}</text>
+            </view>
+            <view class='zan'>
+              <view class='zan-icon'></view>
+              <text>{{item.comment.good}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
     </view>
     <view class="btn-area">
-      <!-- <button bindtap="bindButtonTap">获取视频</button> -->
-      <view class='bottom'>
+      <form class='bottom'>
         <input bindblur="bindInputBlur" placeholder='发送消息' placeholder-style="font-size:30rpx;" focus />
-        <view bindtap="bindSendDanmu" class='danmu'></view>
-      </view>
+        <button bindtap="bindSendDanmu" class='danmu' formType="reset"></button>
+      </form>
     </view>
   </view>
 </view>

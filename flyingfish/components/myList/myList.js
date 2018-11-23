@@ -11,7 +11,8 @@ Component({
     directionId: String,
     feiyu: String,
     activeid: String,
-    bottomShow: Boolean
+    bottomShow: Boolean,
+    hasright:Boolean
   },
 
   /**

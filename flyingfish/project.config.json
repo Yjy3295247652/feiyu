@@ -1,69 +1,68 @@
 {
-	"description": "项目配置文件",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"nodeModules": true
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.4.0",
-	"appid": "wx7aa1e70f6dcc70a5",
-	"projectname": "flying",
-	"debugOptions": {
-		"hidedInDevtools": []
-	},
-	"isGameTourist": false,
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"currentL": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": 3,
-			"list": [
-				{
-					"id": -1,
-					"name": "my",
-					"pathName": "pages/my/my",
-					"query": ""
-				},
-				{
-					"id": 1,
-					"name": "purchasedCourses",
-					"pathName": "pages/purchasedCourses/purchasedCourses",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "index",
-					"pathName": "pages/index/index",
-					"query": ""
-				},
-				{
-					"id": 3,
-					"name": "v",
-					"pathName": "pages/videoroom/videoroom",
-					"query": ""
-				}
-			]
-		}
-	}
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "nodeModules": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.4.0",
+  "appid": "wx7aa1e70f6dcc70a5",
+  "projectname": "fly",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "scripts": {},
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "miniprogram": {
+      "current": 3,
+      "list": [
+        {
+          "id": -1,
+          "name": "my",
+          "pathName": "pages/my/my",
+          "query": ""
+        },
+        {
+          "id": 1,
+          "name": "broadcast",
+          "pathName": "pages/live-broadcast/live-broadcast",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "index",
+          "pathName": "pages/index/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "room",
+          "pathName": "pages/videoroom/videoroom",
+          "query": ""
+        }
+      ]
+    }
+  }
 }

@@ -1,0 +1,5 @@
+{
+  "usingComponents":{
+    "myList":"/components/myList/myList"
+  }
+}

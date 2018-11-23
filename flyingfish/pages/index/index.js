@@ -15,7 +15,69 @@ Page({
     bottomShow: false,
     code: '',
     num: 0,
-    classfy: false
+    classfy: false,
+    select:0,
+    ang:270,
+    right:-100,
+    clicknumber:0,
+    iszhezhao:"none"
+  },
+// 点击遮罩
+  clickzhezhao:function(){
+    this.setData({
+      ang: 270,
+      right: -100,
+      clicknumber:0,
+      iszhezhao: "none"
+    })
+  },
+  //跳转至已购买页面
+  getbought:function(e){
+    var that = this;
+    var number = this.data.clicknumber + 1;
+    that.setData({
+      select: e.currentTarget.dataset.select,
+      clicknumber: number
+    })
+
+    if(this.data.clicknumber%2 == 1){
+      this.setData({
+        ang: 0,
+        right: 20,
+        iszhezhao:"block"
+      })
+    } else if (this.data.clicknumber % 2 == 0){
+      wx.request({
+        url: that.data.feiyu + '/phone/course/buyedCourse',
+        header: {
+          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        },
+        method: "GET",
+        success: res => {
+          this.setData({
+            iszhezhao: "none",
+            ang: 270,
+            right: -100,
+            clicknumber: 0
+          })
+          console.log(res);
+          if (res.data.code !== 0) {
+            wx.showToast({
+              title: '请重新登录',
+              icon: 'none',
+              duration: 2000
+            })
+          } else if (res.data.code == 0) {
+            console.log(this.data.clicknumber);
+            setTimeout(function () {
+              wx.navigateTo({
+                url: '../course/course?select=' + that.data.select,
+              }, 1000)
+            })
+          }
+        }
+      })
+    }
   },
   // 切换方向
   navbarTap: function(e) {

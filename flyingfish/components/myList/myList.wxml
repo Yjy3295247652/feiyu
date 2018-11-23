@@ -1,50 +1,59 @@
 <view>
-  <slide-view class="slide" width="750" height="242" slideWidth="150">
-    <view slot="left" class='l'>
-      <view class='list-lis'>
-        <block>
-          <navigator class='list_lis_li' hover-class='none' url="">
-            <view class='li_pic'>
-              <image src=""></image>
-            </view>
-            <view class='li_content'>
-              <view class='li_content_top'>
-                <view class='h1'>名字</view>
-                <view class='time'>时间</view>
+  <view wx:for="{{listdata}}">
+    <slide-view class="slide" width="750" height="242" slideWidth="150">
+      <view slot="left" class='l'>
+        <view class='list-lis'>
+          <block>
+            <navigator class='list_lis_li' hover-class='none' url="">
+              <view class='li_pic'>
+                <image src=""></image>
               </view>
-              <view class='li_content_bottom'>
-                <block>
-                  <view class='span'>订单号</view>
-                  <view class='price'>
-                    <view class='price_text'>￥</view>
-                    <view class='price_number'>55</view>
-                  </view>
-                </block>
-                <!-- <block wx:else>
-                  <block wx:if="{{flag}}">
-                    <view class='span'>已报名</view>
-                    <view class='span num'>{{item.student_count}}</view>
-                    <view class='span'>万人</view>
+              <view class='li_content'>
+                <view class='li_content_top'>
+                  <view class='h1'>名字</view>
+                  <view class='time'>时间</view>
+                </view>
+                <view class='li_content_bottom'>
+                  <block>
+                    <view class='span'>订单号</view>
+                    <view class='price'>
+                      <view class='price_text'>￥</view>
+                      <view class='price_number'>55</view>
+                    </view>
                   </block>
-                  <block wx:else>
-                    <view class='span'>{{item.student_count}}</view>
-                    <view class='span'>人学过</view>
-                    <view class='cost'>免费</view>
+                  <block>
+                    <block wx:if="{{flag}}">
+                      <view class='span'>已报名</view>
+                      <view class='span num'>{{item.student_count}}</view>
+                      <view class='span'>万人</view>
+                    </block>
+                    <block wx:else>
+                      <view class='span'>{{item.student_count}}</view>
+                      <view class='span'>人学过</view>
+                      <view class='cost'>免费</view>
+                    </block>
                   </block>
-                </block> -->
+                </view>
               </view>
-            </view>
-          </navigator>
-        </block>
-      </view>
-    </view>
-    <view slot="right" class='r'>
-      <view class='delete' bindtap="deleteList" data-index="{{index}}">
-        <view class='deleteZi'>
-          <text>取消收藏</text>
+            </navigator>
+          </block>
         </view>
       </view>
-    </view>
-  </slide-view>
-  <view class='baseline' wx:if="{{bottomShow}}">我是有底线的</view>
+      <view slot="right" class='r'>
+        <view class='delete' bindtap="deleteList" data-index="{{index}}">
+          <view class='deleteZi'>
+            <text>取消收藏</text>
+          </view>
+        </view>
+        <view wx:if="{{hasright == '收藏'}}" slot="right" class='r'>
+          <view class='delete' bindtap="deleteList" data-index="{{index}}">
+            <!-- 取消收藏 -->
+            <view class='deleteZi'>
+              取消收藏
+            </view>
+          </view>
+        </view>
+      </view>
+    </slide-view>
+  </view>
 </view>

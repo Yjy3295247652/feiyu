@@ -8,12 +8,13 @@ function getRandomColor() {
   return '#' + rgb.join('')
 }
 
+// pages/videoroom/videoroom.js
 Page({
   onReady: function(res) {
     this.videoContext = wx.createVideoContext('myVideo')
-    
+
   },
-  
+
   inputValue: '',
   data: {
     content: [],
@@ -21,6 +22,23 @@ Page({
     src: '',
     asd: null
   },
+
+  /**
+   * 页面的初始数据
+   */
+  inputValue: '',
+  data: {
+    feiyu: '',
+    chapterId: '',
+    danmuList: [],
+    chapter: null,
+    commentAndReply: [],
+    src: '',
+    text: '',
+    reply: [],
+    replyFlag: false
+  },
+  //获取域名
   getname() {
     var feiyu = getApp().globalData.host;
     this.setData({
@@ -43,14 +61,14 @@ Page({
       }
     })
   },
-  onLoad: function () {
+  onLoad: function() {
     this.getname();
     this.geta();
-    
+
   },
-  onShow:function(){
+  onShow: function() {
     var that = this;
-    setTimeout(function () {
+    setTimeout(function() {
       console.log(that.data.asd)
       that.setData({
         src: that.data.asd.video_address
@@ -68,5 +86,124 @@ Page({
     this.setData({
       content: this.inputValue
     })
+  },
+  // input失去焦点
+  bindInputBlur: function(e) {
+    this.setData({
+      text: e.detail.value
+    })
+  },
+  //发送按钮点击
+  bindSendDanmu: function(e) {
+    var that = this;
+    wx.request({
+      url: that.data.feiyu + '/phone/course/course_chapter_comment',
+      data: {
+        content: that.data.text,
+        chapterId: that.data.chapter.id
+      },
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+      },
+      success: function(res) {
+        console.log(res.data)
+        that.getChapterCommentList();
+
+      },
+    })
+  },
+  //获取视频节信息、对应评论和回复
+  getChapterCommentList() {
+    var that = this;
+    if (this.data.chapterId) {
+      wx.request({
+        url: this.data.feiyu + '/phone/course/chapterCommentList?chapterId=' + this.data.chapterId,
+        header: {
+          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        },
+        success(res) {
+          that.setData({
+            chapter: res.data.chapter,
+            commentAndReply: res.data.commentAndReply
+          })
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '请重新选择视频',
+        icon: 'none'
+      })
+    }
+  },
+  getReply(e) {
+    console.log(e)
+    this.setData({
+      reply: e.currentTarget.dataset.reply,
+      replyFlag: true
+    })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    this.getname()
+    this.setData({
+      chapterId: options.videoId
+    })
+    this.getChapterCommentList()
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+    this.videoContext = wx.createVideoContext('myVideo')
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    var that = this;
+    setTimeout(function() {
+      that.setData({
+        src: that.data.chapter.video_address
+      })
+    }, 500)
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+
   }
 })
