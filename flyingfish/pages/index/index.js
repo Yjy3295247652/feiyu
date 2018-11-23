@@ -214,7 +214,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    console.log(0)    
+    console.log(0) 
+    wx.showLoading({
+      title: '加载中',
+    })  
+    setTimeout(function(){
+      wx.stopPullDownRefresh(); 
+      wx.hideLoading()
+    },1000)
   },
 
   /**
