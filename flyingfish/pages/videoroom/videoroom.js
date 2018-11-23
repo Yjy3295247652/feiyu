@@ -123,10 +123,17 @@ Page({
           "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
         },
         success(res) {
-          that.setData({
-            chapter: res.data.chapter,
-            commentAndReply: res.data.commentAndReply
-          })
+          if (res.data.code == 0) {
+            that.setData({
+              chapter: res.data.chapter,
+              commentAndReply: res.data.commentAndReply
+            })
+          } else if (res.data.code == 1) {
+            wx.showToast({
+              title: '服务器错误',
+              icon: 'none'
+            })
+          }
         }
       })
     } else {

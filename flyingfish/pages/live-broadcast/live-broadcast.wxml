@@ -1,6 +1,6 @@
 
 <view class='pic'>
-  <image src='{{feiyu}}/{{listdata.course.course_image_address}}'></image>
+  <image src="{{feiyu}}/{{listdata.course.course_image_address}}"></image>
 </view>
 <view class='zhibo-name'>
   <view class='zhibo-top'>{{listdata.teacher.teacher_position}}</view>
