@@ -1,4 +1,3 @@
-<view class="course">
 <!-- select -->
 <!-- 正在学习1，已购课程2，收藏课程3 -->
   <view class="navibar">
@@ -6,6 +5,7 @@
     <view data-cla='2' bindtap='getlistdata' class="{{selected2}}">已购课程</view>
     <view data-cla='3' bindtap='getlistdata' class="{{selected3}}">收藏课程</view>
   </view>
+<view class="course">
 <!-- course -->
   <scroll-view scroll-y style="margin-top:110rpx;width:100vw;height:calc(100%+100)rpx;" bindscrolltolower="loadmoredata">
     <myList
