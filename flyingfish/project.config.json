@@ -14,11 +14,6 @@
 	"libVersion": "2.4.0",
 	"appid": "wx3c60d70dfaad4491",
 	"projectname": "feiyu",
-	"svr": "",
-	"client": "",
-	"qcloudRoot": "",
-	"miniprogramRoot": "",
-	"pluginRoot": "",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -43,15 +38,9 @@
 			"current": 0,
 			"list": [
 				{
-					"id": 0,
-					"name": "video",
-					"pathName": "pages/videoroom/videoroom",
-					"query": "videoId=17"
-				},
-				{
 					"id": -1,
-					"name": "index",
-					"pathName": "pages/index/index",
+					"name": "live-broadcast",
+					"pathName": "pages/videoroom/videoroom",
 					"query": ""
 				}
 			]

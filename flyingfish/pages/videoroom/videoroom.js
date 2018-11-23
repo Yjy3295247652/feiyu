@@ -317,7 +317,6 @@ Page({
             });
             query.select('#all-reply-main').boundingClientRect();
             query.exec(function (res) {
-              console.log(res[0].height);              
               that.setData({
                 scrollTop: res[0].height
               });
