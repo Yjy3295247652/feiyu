@@ -39,19 +39,26 @@ Page({
   //发送按钮点击
   bindSendDanmu: function(e) {
     var that = this;
-    wx.request({
-      url: that.data.feiyu + '/phone/course/course_chapter_comment',
-      data: {
-        content: that.data.text,
-        chapterId: that.data.chapter.id
-      },
-      header: {
-        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
-      },
-      success: function(res) {
-        that.getChapterCommentList();
-      },
-    })
+    if (that.data.text != '') {
+      wx.request({
+        url: that.data.feiyu + '/phone/course/course_chapter_comment',
+        data: {
+          content: that.data.text,
+          chapterId: that.data.chapter.id
+        },
+        header: {
+          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        },
+        success: function(res) {
+          that.getChapterCommentList();
+        },
+      })
+    } else {
+      wx.showToast({
+        title: '请输入信息',
+        icon: 'none'
+      })
+    }
   },
   //获取视频节信息、对应评论和回复
   getChapterCommentList() {

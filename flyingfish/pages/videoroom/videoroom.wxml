@@ -32,7 +32,7 @@
     <view class='di'></view>
     <view class="btn-area">
       <form class='bottom'>
-        <input bindblur="bindInputBlur" placeholder='发送消息' placeholder-style="font-size:30rpx;" />
+        <input bindblur="bindInputBlur" placeholder='发送消息' placeholder-style="font-size:30rpx;" cursor-spacing='10'/>
         <button bindtap="bindSendDanmu" class='danmu' formType="reset"></button>
       </form>
     </view>
