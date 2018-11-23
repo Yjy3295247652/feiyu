@@ -1,9 +1,9 @@
 <wxs src="../../wxs/tool.wxs" module="tool" />
 <view>
   <view class="section tc">
-  <view class='myVideo'>
-    <video id="myVideo" src="{{src}}" wx:if="{{src}}" controls autoplay='true'></video>
-  </view>    
+    <view class='myVideo'>
+      <video id="myVideo" src="{{src}}" wx:if="{{src}}" controls autoplay='true'></video>
+    </view>
     <view class='liuyan' wx:if='{{commentAndReply.length}}'>
       <view class='list' wx:for="{{commentAndReply}}" wx:key="{{index}}">
         <view class='list-img'>
@@ -18,7 +18,7 @@
             <view class='text'>{{item.comment.content}}</view>
           </view>
           <view class='icon'>
-            <view class='zan' data-reply="{{item}}" data-index="{{index}}" bindtap="getReply">
+            <view class='zan' bindtap='getReply' data-index="{{index}}" data-reply="{{item}}">
               <view class='huifu'></view>
               <text>{{item.reply.length}}</text>
             </view>
@@ -33,12 +33,12 @@
     <view class='no-reply' wx:else>暂无评论，快来评论~~~</view>
     <view class="btn-area">
       <form class='bottom'>
-        <input bindblur="bindInputBlur" placeholder='发送消息' placeholder-style="font-size:30rpx;" focus value='{{text}}'/>
+        <input bindblur="bindInputBlur" placeholder='发表评论' placeholder-style="font-size:30rpx;" />
         <button bindtap="bindSendDanmu" class='danmu' formType="reset"></button>
       </form>
     </view>
-    <view class='all-reply' wx:if="{{flag==1 || flag==2}}" bindtouchstart="touchStart" bindtouchend="touchEnd">
-      <scroll-view scroll-y style='height:100%;' bindscrolltoupper="upper" scroll-top="{{scrollTop}}" scroll-with-animation="true">
+    <view class='all-reply' wx:if="{{flag==1}}" bindtouchstart="touchStart" bindtouchend="touchEnd">
+      <scroll-view scroll-y style='height:100%;' scroll-top="{{scrollTop}}" scroll-with-animation="true">
         <view class='main' id="all-reply-main">
           <image src='{{reply.comment.head_image}}'></image>
           <view class='des'>
@@ -65,7 +65,7 @@
       </scroll-view>
       <view class="btn-area" hidden='{{!isCommen}}'>
         <form class='bottom'>
-          <input bindblur='comment1' placeholder='发送消息1' placeholder-style="font-size:30rpx;" focus='{{isCommen}}' value='{{commenText}}'/>
+          <input bindblur='comment1' placeholder='输入回复内容' placeholder-style="font-size:30rpx;" focus='{{isCommen}}' value='{{commenText}}' />
           <button class='danmu' bindtap='send'></button>
         </form>
       </view>

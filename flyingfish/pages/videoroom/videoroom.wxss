@@ -7,7 +7,7 @@
 }
 .myVideo{
   width: 100%;
-  height: 235px;
+  height: 225px;
   position: fixed;
   left: 0;
   top: 0;
@@ -18,7 +18,6 @@
   height: auto;
   padding:225px 0 100rpx 0; 
 }
-
 .btn-area {
   width: 100%;
   height: 100rpx;
@@ -37,7 +36,14 @@
   height: 100%;
   position: relative;
   display: flex;
+  align-items: center;
   justify-content: center;
+}
+
+.btn-area .bottom input {
+  width: 100%;
+  height: 80%;
+  display: flex;
   align-items: center;
 }
 
@@ -45,7 +51,7 @@
   height: 80rpx;
   width: 702rpx;
   border-radius: 50rpx;
-  padding: 0 100rpx 0 40rpx;
+  padding: 0 20rpx 0 40rpx;
   box-sizing: border-box;
   font-size: 30rpx;
   outline: none;
@@ -59,11 +65,11 @@ button::after {
 }
 
 .btn-area .bottom .danmu {
-  width: 80rpx;
-  height: 80rpx;
+  width: 78rpx;
+  height: 78rpx;
   position: absolute;
   right: 26rpx;
-  top: 10rpx;
+  top: 13rpx;
   background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACy0lEQVRoQ+2Zz2sTQRTHvy+JpBWM2S16qGiVdnvooedeCgVPPfVi/4FeJBsVwYt4MR4EvbTQH5sK/QMKFnrOwdIW8X+QSVtRwdumwUMR2TxJmpQ12WRn02Q7C8k133nv+5k3MztvlxDxH0XcPwYAV11BZSqQzou5WAVzMhNiZ41cQ6cMgL4hciC8lgIwjQvfAwCZGZPRDCogM0syGs0S70qm8VJG69YoUQHNEhYBGdu1yWRBrhaAmXSruAXCUtVwtAByHNNvF7cBLDZmOzoAOU5ot4o7RFhwL5VoAKyKpJbALgHzzetcfYDlH8Pa0FmBQLNem1RpAH1VpJBAAcBMuxNGWYD0ykmakn8PCDTd6XhUEuDG+s+Ra7GzQwBTfme7cgDX176PDsX/7AMw/Mwr9xzQPhzdg1P5TMBdGfNKAaQ2j4yE4+yDaFTWfBg69xJt2w/om2KKHT4kopEwTMnmYEallDXiHTsyzTqeBjsHREjLBg5Px79sc/JiRbRUQLfEDBgFEFLhmQqUac82jYeeFdCs41lip2p+OFDIcMUvbNNY9gTQN8RHEB6F6ydINv7tIDlWNsdK3nugze0ySIp+aiugZ6fmxJo7R+sp5HG/76cp2dgM5EumYTbrvY/Rpg5LNkm/dDXzmYksiFgOoK5q9Lj9MtYpLgMOMe85HH9ffjL+qZ3W98WWbokVAM8DQTDeBNK7xBXCKYG+Ik5fSo/Hy35xfAGqATRLvCLgrV+wxv/d3EZlYwdaQm6xlhcZYlgyiZQEqBpP58USMbYInb8rKAtQhdAtsciMbSLE2lVDaYBaJdbFAhHvEFHCC0J5gPONXZwH8y4Rks0QkQA4h/C+/EUGoL4nWq7fkQKoV+K/BihyALVKuFrQSAJUIRovAezs5B2ZB14vNFJXiSCJbq59e1B+ev8kyJjLaHsOcBkz3YwdAHQza70cE/kK/AMS3RpAZWeY1gAAAABJRU5ErkJggg==)no-repeat center center /50rpx auto;
 }
 
@@ -73,8 +79,12 @@ button::after {
   padding: 0 24rpx;
   box-sizing: border-box;
   display: flex;
-  margin: 10rpx 0;
+  margin: 15rpx 0;
   border-bottom: 1rpx solid #f0f0f0;
+}
+
+.list:last-child {
+  border-bottom: 0;
 }
 
 .list-img {

@@ -16,23 +16,23 @@ Page({
     code: '',
     num: 0,
     classfy: false,
-    select:0,
-    ang:270,
-    right:-100,
-    clicknumber:0,
-    iszhezhao:"none"
+    select: 0,
+    ang: 270,
+    right: -100,
+    clicknumber: 0,
+    iszhezhao: "none"
   },
-// 点击遮罩
-  clickzhezhao:function(){
+  // 点击遮罩
+  clickzhezhao: function() {
     this.setData({
       ang: 270,
       right: -100,
-      clicknumber:0,
+      clicknumber: 0,
       iszhezhao: "none"
     })
   },
   //跳转至已购买页面
-  getbought:function(e){
+  getbought: function(e) {
     var that = this;
     var number = this.data.clicknumber + 1;
     that.setData({
@@ -40,13 +40,13 @@ Page({
       clicknumber: number
     })
 
-    if(this.data.clicknumber%2 == 1){
+    if (this.data.clicknumber % 2 == 1) {
       this.setData({
         ang: 0,
         right: 20,
-        iszhezhao:"block"
+        iszhezhao: "block"
       })
-    } else if (this.data.clicknumber % 2 == 0){
+    } else if (this.data.clicknumber % 2 == 0) {
       wx.request({
         url: that.data.feiyu + '/phone/course/buyedCourse',
         header: {
@@ -69,7 +69,7 @@ Page({
             })
           } else if (res.data.code == 0) {
             console.log(this.data.clicknumber);
-            setTimeout(function () {
+            setTimeout(function() {
               wx.navigateTo({
                 url: '../course/course?select=' + that.data.select,
               }, 1000)
@@ -83,7 +83,7 @@ Page({
   navbarTap: function(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx,
-      directionId: e.currentTarget.dataset.directionId,
+      directionId: e.currentTarget.dataset.directionid,
       activeid: 0,
       num: e.target.offsetLeft - 127
     })
@@ -105,16 +105,7 @@ Page({
       feiyu: feiyu
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
 
-  onLoad: function(options) {
-    this.getname();
-    this.getDirection();
-    this.getCurriculum();
-    this.getBanner()
-  },
   // 获取方向
   getDirection() {
     wx.request({
@@ -134,14 +125,13 @@ Page({
   },
   // 获取课程
   getCurriculum() {
-    var directionId = this.data.directionId;
     var classfyId = this.data.classfyId;
     if (classfyId > 0) {
       this.setData({
         classfy: false
       })
       wx.request({
-        url: this.data.feiyu + '/phone/course/findCourse?directionId=' + directionId + '&classfyId=' + classfyId,
+        url: this.data.feiyu + '/phone/course/findCourse?directionId=' + this.data.directionId + '&classfyId=' + this.data.classfyId,
         header: {
           "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
         },
@@ -180,8 +170,14 @@ Page({
       }
     })
   },
-
-
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    wx.showLoading({
+      title: '正在加载',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -193,7 +189,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getname();
+    this.getDirection();
+    this.getCurriculum();
+    this.getBanner();
+    wx.hideLoading();
   },
 
   /**
@@ -214,7 +214,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    console.log(0)    
+    console.log(0)
+    wx.showLoading({
+      title: '加载中',
+    })
+    setTimeout(function() {
+      wx.stopPullDownRefresh();
+      wx.hideLoading()
+    }, 1000)
   },
 
   /**

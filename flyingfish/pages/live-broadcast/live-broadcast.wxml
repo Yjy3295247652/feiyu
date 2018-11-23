@@ -1,3 +1,7 @@
+
+<view class='pic'>
+  <image src="{{imgSrc}}"></image>
+</view>
 <view class='zhibo-name'>
   <view class='zhibo-top'>{{listdata.teacher.teacher_position}}</view>
   <view class='zhibo-bottom'>
@@ -9,7 +13,7 @@
     <view class='btn-btn'>
       <view class="collection-icon" wx:if="{{collectText==false}}" bindtap='getCollectCourse'></view>
       <view class="collection-icon hot" wx:if="{{collectText==true}}"  bindtap='unCollect'></view>
-      <view class='zhibo-icon'></view>
+      <button class='zhibo-icon' open-type="share" button-hover="none"></button>
     </view>
   </view>
 </view>

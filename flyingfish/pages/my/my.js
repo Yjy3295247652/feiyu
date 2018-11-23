@@ -10,7 +10,7 @@ Page({
     userInfomation: null,
     isSignIn: "签到",
     qwer: null,
-    integral:0
+    integral: 0
   },
   //获取域名
   getname() {
@@ -38,8 +38,9 @@ Page({
         success(res) {
           if (res.data.code == 0) {
             wx.showToast({
-              title: '签到成功，加5积分',
+              title: '签到成功，加20积分',
             })
+            this.getUserInfomation();
             that.setData({
               isSignIn: "已签到"
             })
@@ -100,7 +101,7 @@ Page({
         success(res) {
           that.setData({
             userInfomation: res.data.userInfo,
-            integral:res.data.integral.integralNumber
+            integral: res.data.integral.integralNumber
           })
         }
       })
@@ -110,7 +111,7 @@ Page({
           nickname: "游客",
           head_image: ""
         },
-        integral:0
+        integral: 0
       })
     }
   },

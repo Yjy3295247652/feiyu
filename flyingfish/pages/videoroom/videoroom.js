@@ -15,11 +15,9 @@ let time = 0;//从按下到松开共多少时间*100
 var query = "";
 // pages/videoroom/videoroom.js
 Page({
-
   /**
    * 页面的初始数据
    */
-  inputValue: '',
   data: {
     feiyu: '',
     chapterId: '',
@@ -94,6 +92,21 @@ Page({
             chapter: res.data.chapter,
             commentAndReply: res.data.commentAndReply
           });
+          //设置页面标题
+          wx.setNavigationBarTitle({
+            title: that.data.chapter.chapter_info
+          })
+          if (res.data.code == 0) {
+            that.setData({
+              chapter: res.data.chapter,
+              commentAndReply: res.data.commentAndReply
+            })
+          } else if (res.data.code == 1) {
+            wx.showToast({
+              title: '服务器错误',
+              icon: 'none'
+            })
+          }
         }
       })
     } else {
@@ -115,11 +128,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getname()
+    wx.showLoading({
+      title: '正在加载',
+    })
     this.setData({
       chapterId: options.videoId
     })
-    this.getChapterCommentList()
   },
 
   /**
@@ -134,12 +148,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.getname();
+    this.getChapterCommentList()
     var that = this;
     setTimeout(function() {
       that.setData({
         src: that.data.chapter.video_address
       })
     }, 500)
+    wx.hideLoading();
   },
 
   /**
@@ -197,32 +214,23 @@ Page({
       if (absX > 2 * absY) {
         if (tmX < 0) {
           // console.log("左滑=====")
+          this.setData({
+            flag:0
+          });
         } else {
-          // console.log("右滑=====")
+         this.setData({
+           flag:0
+         });
         }
       }
       if (absY > absX * 2 && tmY < 0) {
         // console.log("上滑动=====")
       }
-      if (absY > absX * 2 && tmY > 0){
-          if(this.data.flag == 1){
-            this.setData({
-              flag: 0
-            });
-          }         
-      }else{
-        this.setData({
-          flag:2
-        });
+      if (absY > absX * 2 && tmY > 0){       
       }
     }
     clearInterval(interval); // 清除setInterval
     time = 0;
-  },
-  upper(){
-    this.setData({
-      flag:1
-    });
   },
   like(e){
     let id = e.currentTarget.dataset.id;

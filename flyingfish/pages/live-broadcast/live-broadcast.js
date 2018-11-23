@@ -12,7 +12,8 @@ Page({
     bottomShow: false,
     videoId: '',
     collectText: false,
-    isBuy: ''
+    isBuy: '',
+    imaSrc: ''
   },
   navbarTap: function(e) {
     this.setData({
@@ -124,12 +125,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getname();
     this.setData({
       courseId: options.courseId,
       price: options.price
     })
-    this.getlistdata();
+    wx.showLoading({
+      title: '正在加载',
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -142,7 +144,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getname();
+    this.getlistdata();
+    var that = this
+    setTimeout(function(){
+      that.setData({
+        imgSrc: that.data.feiyu + '/' + that.data.listdata.course.course_image_address
+      })
+    },400)
+    wx.hideLoading()
   },
 
   /**
