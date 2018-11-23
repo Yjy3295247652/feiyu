@@ -7,7 +7,7 @@
     <view data-cla='3' bindtap='getlistdata' class="{{selected3}}">收藏课程</view>
   </view>
 <!-- course -->
-  <scroll-view scroll-y style="width:100vw;height:calc(100vh - 100rpx);">
+  <scroll-view scroll-y style="margin-top:110rpx;width:100vw;height:calc(100%+100)rpx;" bindscrolltolower="loadmoredata">
     <myList
     hasright="收藏"
     listdata="{{coursedata}}"
