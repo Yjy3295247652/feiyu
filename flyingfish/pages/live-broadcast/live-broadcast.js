@@ -12,7 +12,8 @@ Page({
     bottomShow: false,
     videoId: '',
     collectText: false,
-    isBuy: ''
+    isBuy: '',
+    imaSrc: ''
   },
   navbarTap: function(e) {
     this.setData({
@@ -142,7 +143,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    var that = this
+    setTimeout(function(){
+      that.setData({
+        imgSrc: that.data.feiyu + '/' + that.data.listdata.course.course_image_address
+      })
+    },400)
   },
 
   /**

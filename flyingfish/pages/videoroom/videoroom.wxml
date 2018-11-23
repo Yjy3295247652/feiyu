@@ -17,7 +17,7 @@
             <view class='text'>{{item.comment.content}}</view>
           </view>
           <view class='icon'>
-            <view class='zan' data-reply="{{item.reply}}" bindtap="getReply">
+            <view class='zan'>
               <view class='huifu'></view>
               <text>{{item.reply.length}}</text>
             </view>
