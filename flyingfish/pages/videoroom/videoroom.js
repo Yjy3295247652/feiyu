@@ -10,6 +10,18 @@ function getRandomColor() {
 
 // pages/videoroom/videoroom.js
 Page({
+  onReady: function(res) {
+    this.videoContext = wx.createVideoContext('myVideo')
+
+  },
+
+  inputValue: '',
+  data: {
+    content: [],
+    feiyu: '',
+    src: '',
+    asd: null
+  },
 
   /**
    * 页面的初始数据
@@ -22,14 +34,58 @@ Page({
     chapter: null,
     commentAndReply: [],
     src: '',
-    text:'',
-    reply:[]
+    text: '',
+    reply: [],
+    replyFlag: false
+
   },
   //获取域名
   getname() {
     var feiyu = getApp().globalData.host;
     this.setData({
       feiyu: feiyu
+    })
+  },
+  geta() {
+    var that = this;
+    wx.request({
+      url: this.data.feiyu + '/phone/course/chapterCommentList?chapterId=144',
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+      },
+      success(res) {
+        console.log(res.data)
+        that.setData({
+          asd: res.data.chapter
+        })
+        console.log(that.data.asd)
+      }
+    })
+  },
+  onLoad: function() {
+    this.getname();
+    this.geta();
+
+  },
+  onShow: function() {
+    var that = this;
+    setTimeout(function() {
+      console.log(that.data.asd)
+      that.setData({
+        src: that.data.asd.video_address
+      })
+    }, 500)
+  },
+  bindInputBlur: function(e) {
+    this.inputValue = e.detail.value
+  },
+  bindSendDanmu: function() {
+    this.videoContext.sendDanmu({
+      text: this.inputValue,
+      color: getRandomColor()
+    });
+    this.setData({
+      content: this.inputValue
     })
   },
   // input失去焦点
@@ -80,14 +136,14 @@ Page({
       })
     }
   },
-  getReply(e){
+  getReply(e) {
     console.log(e)
     this.setData({
-      reply:e.currentTarget.dataset.reply,
-      replyFlag:true
+      reply: e.currentTarget.dataset.reply,
+      replyFlag: true
     })
   },
- 
+
   /**
    * 生命周期函数--监听页面加载
    */
