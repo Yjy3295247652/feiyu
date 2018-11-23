@@ -63,6 +63,7 @@ Page({
           "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
         },
         success(res) {
+          console.log(res.data)
           if (res.data.code == 0) {
             that.setData({
               chapter: res.data.chapter,
@@ -107,7 +108,6 @@ Page({
    */
   onShow: function() {
     this.getname()
-    
     this.getChapterCommentList()
     var that = this;
     setTimeout(function() {

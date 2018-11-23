@@ -78,7 +78,7 @@ Page({
       })
     }
   },
-  // 获取收藏课程
+  // 收藏课程
   getCollectCourse() {
     var that = this;
     wx.request({
@@ -121,10 +121,31 @@ Page({
       }
     })
   },
+  onShareAppMessage: function () {
+    return {
+      title: '飞鱼学院',
+      path: '/pages/live-broadcast/live-broadcast?isshare=1',
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
+  goIndex(){
+    wx.reLaunch({
+      url: '/pages/index/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options);
+    if (options.isshare == 1) {
+      console.log('是分享进入');
+    }
     this.setData({
       courseId: options.courseId,
       price: options.price
@@ -132,6 +153,8 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
+    this.getname();
+    this.getlistdata();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -139,19 +162,16 @@ Page({
   onReady: function() {
 
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.getname();
-    this.getlistdata();
     var that = this
-    setTimeout(function(){
+    setTimeout(function() {
       that.setData({
         imgSrc: that.data.feiyu + '/' + that.data.listdata.course.course_image_address
       })
-    },400)
+    }, 400)
     wx.hideLoading()
   },
 
@@ -173,7 +193,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    this.getlistdata();
+    setTimeout(function() {
+      wx.stopPullDownRefresh()
+    }, 500)
   },
 
   /**
