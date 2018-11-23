@@ -4,17 +4,21 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true,
-		"nodeModules": true
+		"newFeature": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.4.0",
-	"appid": "wx7aa1e70f6dcc70a5",
-	"projectname": "fly",
+	"appid": "wx3c60d70dfaad4491",
+	"projectname": "feiyu",
+	"svr": "",
+	"client": "",
+	"qcloudRoot": "",
+	"miniprogramRoot": "",
+	"pluginRoot": "",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -36,8 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+
 		}
 	}
 }

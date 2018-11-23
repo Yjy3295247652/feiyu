@@ -7,6 +7,12 @@ function getRandomColor() {
   }
   return '#' + rgb.join('')
 }
+let touchDotX = 0;//X按下时坐标
+let touchDotY = 0;//y按下时坐标
+let interval;//计时器
+let time = 0;//从按下到松开共多少时间*100
+//创建节点选择器
+var query = "";
 // pages/videoroom/videoroom.js
 Page({
   /**
@@ -19,9 +25,13 @@ Page({
     chapter: null,
     commentAndReply: [],
     src: '',
-    text: '',
-    reply: [],
-    replyFlag: false
+    text:'',
+    reply:{},
+    replyFlag:false,
+    flag:0,
+    isCommen:false,
+    commenText:"",
+    scrollTop:0,
   },
   //获取域名
   getname() {
@@ -33,12 +43,15 @@ Page({
   // input失去焦点
   bindInputBlur: function(e) {
     this.setData({
-      text: e.detail.value
+      text: e.detail.value.trim()
     })
   },
   //发送按钮点击
   bindSendDanmu: function(e) {
     var that = this;
+    if (that.data.text==""){
+      return;
+    }
     wx.request({
       url: that.data.feiyu + '/phone/course/course_chapter_comment',
       data: {
@@ -49,7 +62,16 @@ Page({
         "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
       },
       success: function(res) {
-        that.getChapterCommentList();
+        if (res.data.code==0){
+          that.getChapterCommentList();
+          that.setData({
+            text:""
+          });
+          wx.pageScrollTo({
+            scrollTop:0,
+            duration:0
+          });
+        }
       },
     })
   },
@@ -63,7 +85,17 @@ Page({
           "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
         },
         success(res) {
-          console.log(res.data)
+          res.data.commentAndReply.forEach(function(val,index){
+            val.comment.isGood = false;
+          });
+          that.setData({
+            chapter: res.data.chapter,
+            commentAndReply: res.data.commentAndReply
+          });
+          //设置页面标题
+          wx.setNavigationBarTitle({
+            title: that.data.chapter.chapter_info
+          })
           if (res.data.code == 0) {
             that.setData({
               chapter: res.data.chapter,
@@ -84,6 +116,14 @@ Page({
       })
     }
   },
+  getReply(e){
+    e.currentTarget.dataset.reply.index = e.currentTarget.dataset.index;
+    this.setData({
+      reply:e.currentTarget.dataset.reply,
+      flag:1,
+      scrollTop:0
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -101,13 +141,14 @@ Page({
    */
   onReady: function() {
     this.videoContext = wx.createVideoContext('myVideo')
+    query = wx.createSelectorQuery();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.getname()
+    this.getname();
     this.getChapterCommentList()
     var that = this;
     setTimeout(function() {
@@ -151,5 +192,138 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  // 触摸开始事件
+  touchStart: function (e) {
+    touchDotX = e.touches[0].pageX; // 获取触摸时的原点
+    touchDotY = e.touches[0].pageY;
+    // 使用js计时器记录时间    
+    interval = setInterval(function () {
+      time++;
+    }, 100);
+  },
+  // 触摸结束事件
+  touchEnd: function (e) {
+    let touchMoveX = e.changedTouches[0].pageX;
+    let touchMoveY = e.changedTouches[0].pageY;
+    let tmX = touchMoveX - touchDotX;
+    let tmY = touchMoveY - touchDotY;
+    if (time < 20) {
+      let absX = Math.abs(tmX);
+      let absY = Math.abs(tmY);
+      if (absX > 2 * absY) {
+        if (tmX < 0) {
+          // console.log("左滑=====")
+          this.setData({
+            flag:0
+          });
+        } else {
+         this.setData({
+           flag:0
+         });
+        }
+      }
+      if (absY > absX * 2 && tmY < 0) {
+        // console.log("上滑动=====")
+      }
+      if (absY > absX * 2 && tmY > 0){       
+      }
+    }
+    clearInterval(interval); // 清除setInterval
+    time = 0;
+  },
+  like(e){
+    let id = e.currentTarget.dataset.id;
+    let that = this;
+    let commentAndReply = that.data.commentAndReply;
+    let url = "";
+    if (e.currentTarget.dataset.isgood){
+      url = that.data.feiyu + "/phone/course/comment_good_down"      
+    }else{
+     url =  that.data.feiyu + "/phone/course/comment_good"
+    }
+    wx.request({
+      url: url,
+      data:{
+        commentId:id
+      },
+      success(res){
+        if (res.data.msg == "点赞成功"){
+          commentAndReply[e.currentTarget.dataset.index].comment.isGood = true;
+          commentAndReply[e.currentTarget.dataset.index].comment.good = res.data.good;
+          that.setData({
+            commentAndReply: commentAndReply
+          });
+          let reply = commentAndReply[e.currentTarget.dataset.index];
+          reply.index = e.currentTarget.dataset.index;
+          if(that.data.flag !=0){
+            that.setData({
+              reply: reply
+            })
+          }
+        } else if (res.data.message == "点灭成功"){
+          commentAndReply[e.currentTarget.dataset.index].comment.isGood = false;
+          commentAndReply[e.currentTarget.dataset.index].comment.good = res.data.good;
+          that.setData({
+            commentAndReply: commentAndReply
+          });
+          let reply = commentAndReply[e.currentTarget.dataset.index];
+          reply.index = e.currentTarget.dataset.index;
+          if (that.data.flag != 0) {
+            that.setData({
+              reply: reply
+            })
+          }
+        }
+      }
+    })
+  },
+  comment(){
+    let that = this;
+    that.setData({
+      isCommen:true
+    });
+  },
+  comment1(e){
+    let that = this;
+    that.setData({
+      isCommen: false,
+      commenText: e.detail.value.trim()
+    });
+  },
+  send(){
+    if(this.data.commenText!=""){
+      let that = this;
+      wx.request({
+        url: that.data.feiyu +"//phone/course/chapter_comment_reply",
+        data:{
+          commentId: that.data.reply.comment.id,
+          replyUserId: that.data.reply.comment.userId,
+          reply: that.data.commenText
+        },
+        header:{
+          Cookie: "JSESSIONID=" + wx.getStorageSync("sessionId")
+        },
+        success(res){
+          if(res.data.code == 0){
+            let commentAndReply = that.data.commentAndReply;
+            commentAndReply[that.data.reply.index].reply.push(res.data.reply);
+            let reply = that.data.reply;
+            reply.reply.push(res.data.reply);
+            that.setData({
+              commenText:"",
+              commentAndReply: commentAndReply,
+              reply: reply
+            });
+            query.select('#all-reply-main').boundingClientRect();
+            query.exec(function (res) {
+              that.setData({
+                scrollTop: res[0].height
+              });
+            })
+          }
+        }
+      })
+    }
   }
 })
