@@ -10,7 +10,7 @@ Page({
     userInfomation: null,
     isSignIn: "签到",
     qwer: null,
-    integral:0
+    integral: 0
   },
   //获取域名
   getname() {
@@ -100,7 +100,7 @@ Page({
         success(res) {
           that.setData({
             userInfomation: res.data.userInfo,
-            integral:res.data.integral.integralNumber
+            integral: res.data.integral.integralNumber
           })
         }
       })
@@ -110,7 +110,7 @@ Page({
           nickname: "游客",
           head_image: ""
         },
-        integral:0
+        integral: 0
       })
     }
   },

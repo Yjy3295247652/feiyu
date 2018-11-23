@@ -83,7 +83,7 @@ Page({
   navbarTap: function(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx,
-      directionId: e.currentTarget.dataset.directionId,
+      directionId: e.currentTarget.dataset.directionid,
       activeid: 0,
       num: e.target.offsetLeft - 127
     })
@@ -134,14 +134,14 @@ Page({
   },
   // 获取课程
   getCurriculum() {
-    var directionId = this.data.directionId;
+    // var directionId = this.data.directionId;
     var classfyId = this.data.classfyId;
     if (classfyId > 0) {
       this.setData({
         classfy: false
       })
       wx.request({
-        url: this.data.feiyu + '/phone/course/findCourse?directionId=' + directionId + '&classfyId=' + classfyId,
+        url: this.data.feiyu + '/phone/course/findCourse?directionId=' + this.data.directionId + '&classfyId=' + this.data.classfyId,
         header: {
           "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
         },

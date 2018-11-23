@@ -29,6 +29,7 @@
                     <view class='price_text'>￥</view>
                     <view class='price_number'>{{item.coursePrice}}</view>
                   </view>
+
                 </view>
               </view>
             </navigator>
@@ -36,13 +37,13 @@
         </view>
       </view>
       <view wx:if="{{selected == 3}}" slot="right" class='r'>
-        <view class='delete' bindtap="deleteList" data-index="{{item.courseId}}">
-        <!-- 取消收藏 -->
-          <view class='deleteZi'>
-            取消收藏
+          <view class='delete' bindtap="deleteList" data-index="{{index}}">
+            <!-- 取消收藏 -->
+            <view class='deleteZi'>
+              取消收藏
+            </view>
           </view>
         </view>
-    </view>
     </slide-view>
   </view>
 </view>

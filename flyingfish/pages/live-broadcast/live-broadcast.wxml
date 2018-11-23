@@ -1,6 +1,7 @@
-<video wx:if="{{flag}}" id="myVideo" class='video' src="{{videoAddress}}" binderror="videoErrorCallback" controls direction="90" autoplay="true"></video>
-<video wx:if="{{!flag}}" id="myVideo" class='video' src="{{videoAddress}}" binderror="videoErrorCallback" controls direction="90" autoplay="true"></video>
 
+<view class='pic'>
+  <image src="{{imgSrc}}"></image>
+</view>
 <view class='zhibo-name'>
   <view class='zhibo-top'>{{listdata.teacher.teacher_position}}</view>
   <view class='zhibo-bottom'>
@@ -9,7 +10,11 @@
       <text>:</text>
       <text>{{listdata.teacher.teacher_name}}</text>
     </view>
-    <navigator hover-class='none' url='' class='zhibo-icon'></navigator>
+    <view class='btn-btn'>
+      <view class="collection-icon" wx:if="{{collectText==false}}" bindtap='getCollectCourse'></view>
+      <view class="collection-icon hot" wx:if="{{collectText==true}}"  bindtap='unCollect'></view>
+      <button class='zhibo-icon' open-type="share" button-hover="none"></button>
+    </view>
   </view>
 </view>
 <view class='option_card'>
@@ -17,7 +22,7 @@
     <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="{{index}}" bindtap="navbarTap">{{item}}</text>
   </view>
 
-  <!-- 直播列表 -->
+  <!-- 视频列表 -->
   <view hidden="{{currentTab!==0}}">
     <view class='live-list'>
       <view class='list-lis'>
@@ -26,15 +31,12 @@
             <view class='li_content'>
               <view class='li_content_top'>
                 <view class='h1'>{{item.chapter.chapter_title}}</view>
-                <!-- <view class='time'>
-                  <view>{{tool.getTime(item.chapter.updateTime)}}</view>
-                </view> -->
               </view>
             </view>
           </view>
           <block wx:for="{{item.section}}" wx:key="{{index}}">
-            <view class="jie {{isChecked==item.id?'is_checked':''}}" bindtap='getVideo' data-address="{{item}}" data-id="{{item.id}}">
-              <view class="icon-jiao {{isChecked==item.id?'is_checked':''}}"></view>
+            <view class="jie" bindtap='getVideo' data-address="{{item}}" data-id="{{item.id}}">
+              <view class="icon-jiao"></view>
               <view class="jie-dian">{{item.chapter_name}}</view>
             </view>
           </block>
@@ -49,7 +51,5 @@
 
   </view>
 </view>
-<view class='enter' wx:if="{{price == 0 && collectText==false}}" bindtap='getCollectCourse'>加入收藏</view>
-<view class='enter' wx:if="{{price == 0 && collectText==true}}" bindtap='unCollect'>取消收藏</view>
 <view class='enter' wx:if="{{price != 0 && isBuy==0}}">立即购买</view>
-<!-- <view class='enter' wx:if="{{price != 0 && isBuy==1}}">立即购买</view> -->
+<view class='enter' wx:if="{{price != 0 && isBuy==1}}">已购买</view>
