@@ -16,17 +16,13 @@
             <view class='text'>{{item.comment.content}}</view>
           </view>
           <view class='icon'>
-            <view class='huifu'></view>
+            <view class='zan' data-reply="{{item.reply}}" bindtap="getReply">
+              <view class='huifu'></view>
+              <text>{{item.reply.length}}</text>
+            </view>
             <view class='zan'>
               <view class='zan-icon'></view>
               <text>{{item.comment.good}}</text>
-            </view>
-          </view>
-          <view class='list-huifu' wx:for="{{item.reply}}" wx:key="{{index}}">
-            <view class='h'>
-              <text class='one'>{{item.replyUserName}}</text>
-              <text>回复：</text>
-              <text class='last'>{{item.reply}}</text>
             </view>
           </view>
         </view>

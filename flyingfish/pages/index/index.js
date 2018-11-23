@@ -15,7 +15,35 @@ Page({
     bottomShow: false,
     code: '',
     num: 0,
-    classfy: false
+    classfy: false,
+    select:0
+  },
+  //跳转至已购买页面
+  getbought:function(e){
+    this.setData({
+      select: e.currentTarget.dataset.select
+    })
+    wx.request({
+      url: this.data.feiyu +'/phone/course/buyedCourse',
+      header: {
+        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+      },
+      method:"GET",
+      success:res=>{
+        console.log(res);
+        if(res.data.code !== 0){
+          wx.showToast({
+            title: '服务器错误',
+            icon:'none',
+            duration:2000
+          })
+        }else if(res.data.code == 0){
+          wx.navigateTo({
+            url: '../course/course?select='+this.data.select,
+          })
+        }
+      }
+    })
   },
   // 切换方向
   navbarTap: function(e) {

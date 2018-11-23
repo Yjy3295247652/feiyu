@@ -99,7 +99,8 @@ Page({
         },
         success(res) {
           that.setData({
-            userInfomation: res.data.userInfo
+            userInfomation: res.data.userInfo,
+            integral:res.data.integral.integralNumber
           })
         }
       })
@@ -108,7 +109,8 @@ Page({
         userInfomation: {
           nickname: "游客",
           head_image: ""
-        }
+        },
+        integral:0
       })
     }
   },

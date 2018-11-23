@@ -14,11 +14,11 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.4.0",
 	"appid": "wx7aa1e70f6dcc70a5",
-	"projectname": "flying",
+	"projectname": "fly",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
-	"isGameTourist": false,
+	"scripts": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -33,11 +33,18 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
+<<<<<<< HEAD
 			"current": 2,
+=======
+<<<<<<< HEAD
+			"current": -1,
+=======
+			"current": 3,
+>>>>>>> 8afc99fb59dc3363765ffafeb0e7400667298ae4
+>>>>>>> 09f9fd8fb4061bd029138207226942aefbd626d6
 			"list": [
 				{
 					"id": -1,
@@ -46,16 +53,28 @@
 					"query": ""
 				},
 				{
+<<<<<<< HEAD
+=======
+					"id": 1,
+					"name": "broadcast",
+					"pathName": "pages/live-broadcast/live-broadcast",
+					"query": ""
+				},
+				{
+>>>>>>> 09f9fd8fb4061bd029138207226942aefbd626d6
 					"id": -1,
 					"name": "index",
 					"pathName": "pages/index/index",
 					"query": ""
+<<<<<<< HEAD
+=======
 				},
 				{
 					"id": -1,
 					"name": "room",
 					"pathName": "pages/videoroom/videoroom",
 					"query": ""
+>>>>>>> 8afc99fb59dc3363765ffafeb0e7400667298ae4
 				}
 			]
 		}

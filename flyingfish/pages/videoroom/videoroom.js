@@ -22,7 +22,9 @@ Page({
     chapter: null,
     commentAndReply: [],
     src: '',
-    text:''
+    text:'',
+    reply:[],
+    replyFlag:false
   },
   //获取域名
   getname() {
@@ -78,6 +80,13 @@ Page({
         icon: 'none'
       })
     }
+  },
+  getReply(e){
+    console.log(e)
+    this.setData({
+      reply:e.currentTarget.dataset.reply,
+      replyFlag:true
+    })
   },
   /**
    * 生命周期函数--监听页面加载
