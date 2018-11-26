@@ -3,6 +3,9 @@
   <view class="section tc">
     <view class='myVideo'>
       <video id="myVideo" src="{{src}}" wx:if="{{src}}" controls autoplay='true'></video>
+      <view class='videoInfo'>
+        <view class='videoName'>{{chapter.chapter_name}}</view>
+      </view>
     </view>
     <view class='liuyan' wx:if='{{commentAndReply.length}}'>
       <view class='list' wx:for="{{commentAndReply}}" wx:key="{{index}}">
@@ -22,8 +25,9 @@
               <view class='huifu'></view>
               <text>{{item.reply.length}}</text>
             </view>
-            <view class='zan' catchtap='like' data-isgood="{{item.comment.isGood}}" data-index="{{index}}" data-id="{{item.comment.id}}">
-              <view class='zan-icon {{item.comment.isGood?"zan-icon1":"zan-icon2"}}'></view>
+            <view class='zan' data-index="{{index}}" data-id="{{item.comment.id}}">
+              <view class='zan-icon {{currentComment.id == item.comment.id?"zan-icon1":"zan-icon2"}}' data-comment="{{item.comment}}" bindtap='cancelZan' wx:if="{{isGoodShow}}"></view>
+              <view class='zan-icon zan-icon2' data-comment="{{item.comment}}" bindtap='hotZan' wx:else></view>
               <text>{{item.comment.good}}</text>
             </view>
           </view>
@@ -44,9 +48,10 @@
             <view class='des-top'>
               <text class='user-name'>{{reply.comment.nickName}}</text>
               <view class='reply-all-icon'>
-                <view class='zan' catchtap='like' data-isgood="{{reply.comment.isGood}}" data-index="{{reply.index}}" data-id="{{reply.comment.id}}">
-                  <view class='zan-icon {{reply.comment.isGood?"zan-icon1":"zan-icon2"}}'></view>
-                  <text>{{reply.comment.good}}</text>
+                <view class='zan' data-index="{{reply.index}}" data-id="{{reply.comment.id}}">
+                  <view class='zan-icon zan-icon1' data-comment="{{reply.comment}}" bindtap='cancelZan' wx:if="{{isGoodShow}}"></view>
+                  <view class='zan-icon zan-icon2' data-comment="{{reply.comment}}" bindtap='hotZan' wx:else></view>
+                  <text>{{goodNum}}</text>
                 </view>
                 <view class='reply-btn' bindtap='comment'></view>
               </view>
