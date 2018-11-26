@@ -26,7 +26,7 @@ Page({
   clickzhezhao: function() {
     this.setData({
       ang: 270,
-      right: -100,
+      right: -60,
       clicknumber: 0,
       iszhezhao: "none"
     })
@@ -60,7 +60,7 @@ Page({
           this.setData({
             iszhezhao: "none",
             ang: 270,
-            right: -100,
+            right: -60,
             clicknumber: 0
           })
           console.log(res);
