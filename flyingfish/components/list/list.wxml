@@ -32,7 +32,7 @@
               <block wx:if="{{flag}}">
                 <view class='span'>已报名</view>
                 <view class='span num'>{{item.student_count}}</view>
-                <view class='span'>万人</view>
+                <view class='span'>人</view>
               </block>
               <block wx:else>
                 <view class='span'>{{item.student_count}}</view>

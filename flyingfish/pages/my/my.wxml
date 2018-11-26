@@ -31,7 +31,7 @@
     </navigator>
     <navigator class='nei' hover-class='none' url='/pages/course/course?select=1'>
       <image src='/image/my/history.png'></image>
-      <view class='nei-name'>观看历史</view>
+      <view class='nei-name'>正在学习</view>
     </navigator>
     <navigator class='nei' hover-class='none' url='/pages/waiting/waiting'>
       <image src='/image/my/activity.png'></image>

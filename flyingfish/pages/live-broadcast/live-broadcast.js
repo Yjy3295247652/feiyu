@@ -278,6 +278,19 @@ Page({
       package: '',
       signType: '',
       paySign: 'MD5',
+      success:res=>{
+        this.setData({
+          isBuy: 1
+        })
+        wx.reLaunch({
+          url: '/pages/live-broadcast/live-broadcast'
+        })
+      }
+    })
+  },
+  cancel(){
+    wx.reLaunch({
+      url: '/pages/index/index'
     })
   },
   /**
