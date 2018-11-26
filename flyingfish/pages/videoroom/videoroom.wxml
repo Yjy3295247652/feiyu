@@ -35,7 +35,7 @@
       </view>
     </view>
     <view class='no-reply' wx:else>暂无评论，快来评论~~~</view>
-    <view class="btn-area">
+    <view class="btn-area" hidden='{{isCommen}}'>
       <form class='bottom'>
         <input bindconfirm='bindInputBlur' placeholder='发表评论' placeholder-style="font-size:30rpx;" value='{{text}}' />
       </form>
@@ -68,8 +68,8 @@
         </view>
       </scroll-view>
       <view class="btn-area" hidden='{{!isCommen}}'>
-        <form class='bottom'>
-          <input bindblur='comment2' bindconfirm='comment1' placeholder='输入回复内容' placeholder-style="font-size:30rpx;" focus='{{isCommen}}' value='{{commenText}}' />
+        <form class='bottom bottom1'>
+          <input bindblur='comment2' bindconfirm='comment1' placeholder='发表评论' placeholder-style="font-size:30rpx;" focus='{{isCommen}}' value='{{commenText}}' />
         </form>
       </view>
     </view>

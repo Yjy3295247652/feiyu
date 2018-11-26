@@ -62,7 +62,7 @@
           <view class='li_h2'>
             <view class='item-list'>
               <view class='img'>
-                <image src='{{feiyu}}/{{listdata.teacher.teacher_image}}'></image>
+                <image src="{{manImgSrc}}"></image>
               </view>
               <view class='teacher'>
                 <view class='h2-name'>讲师介绍：

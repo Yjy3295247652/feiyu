@@ -14,11 +14,12 @@ Page({
     collectText: false,
     isBuy: '',
     imaSrc: '',
-    isPopping: false,//是否已经弹出
-    animPlus: {},//旋转动画
-    animCollect: {},//item位移,透明度
-    animTranspond: {},//item位移,透明度
-    animInput: {},//item位移,透明度
+    manImgSrc: '',
+    isPopping: false, //是否已经弹出
+    animPlus: {}, //旋转动画
+    animCollect: {}, //item位移,透明度
+    animTranspond: {}, //item位移,透明度
+    animInput: {}, //item位移,透明度
   },
   navbarTap: function(e) {
     this.setData({
@@ -35,9 +36,34 @@ Page({
   getVideo(e) {
     this.setData({
       videoId: e.currentTarget.dataset.id,
-    })
-    wx.navigateTo({
-      url: '/pages/videoroom/videoroom?videoId=' + this.data.videoId,
+    });
+    wx.request({
+      url: this.data.feiyu + '/phone/course/saveStudyByCourse',
+      header: {
+        "openId": wx.getStorageSync("openId"),
+        "userId": wx.getStorageSync("userId"),
+        "userInfoId": wx.getStorageSync("userInfoId"),
+        "userName": wx.getStorageSync("userName")
+      },
+      data: {
+        courseId: this.data.courseId,
+        chapterId: e.currentTarget.dataset.id
+      },
+      success: res => {
+        if(res.data.code == 0){
+          wx.navigateTo({
+            url: '/pages/videoroom/videoroom?videoId=' + this.data.videoId,
+          })
+        }else if(res.data.code == 1){
+          wx.showToast({
+            title: '加入学习失败',
+            icon:'none'
+          })
+          wx.navigateTo({
+            url: '/pages/videoroom/videoroom?videoId=' + this.data.videoId,
+          })
+        }
+      }
     })
   },
   // 获取视频列表信息
@@ -151,7 +177,7 @@ Page({
     }
   },
   //点击弹出
-  plus: function () {
+  plus: function() {
     if (this.data.isPopping) {
       //缩回动画
       this.popp();
@@ -166,18 +192,18 @@ Page({
       })
     }
   },
-  input: function () {
+  input: function() {
     console.log("input")
   },
-  transpond: function () {
+  transpond: function() {
     console.log("transpond")
   },
-  collect: function () {
+  collect: function() {
     console.log("collect")
   },
 
   //弹出动画
-  popp: function () {
+  popp: function() {
     //plus顺时针旋转
     var animationPlus = wx.createAnimation({
       duration: 500,
@@ -195,7 +221,7 @@ Page({
       duration: 500,
       timingFunction: 'ease-out'
     })
-    animationPlus.translate(-25,-10).step();
+    animationPlus.translate(-25, -10).step();
     animationcollect.translate(-30, -65).rotateZ(360).opacity(1).step();
     animationTranspond.translate(-75, -55).rotateZ(360).opacity(1).step();
     animationInput.translate(-85, -20).rotateZ(360).opacity(1).step();
@@ -207,7 +233,7 @@ Page({
     })
   },
   //收回动画
-  takeback: function () {
+  takeback: function() {
     //plus逆时针旋转
     var animationPlus = wx.createAnimation({
       duration: 500,
@@ -242,7 +268,7 @@ Page({
     })
   },
   //立即购买
-  toBuy(){
+  toBuy() {
     var timestamp = Date.parse(new Date());
     timestamp = timestamp / 1000;
     console.log("当前时间戳为：" + timestamp);
@@ -282,7 +308,8 @@ Page({
     var that = this
     setTimeout(function() {
       that.setData({
-        imgSrc: that.data.feiyu + '/' + that.data.listdata.course.course_image_address
+        imgSrc: that.data.feiyu + '/' + that.data.listdata.course.course_image_address,
+        manImgSrc: that.data.feiyu + '/' + that.data.listdata.teacher.teacher_image
       })
     }, 500)
     wx.hideLoading()

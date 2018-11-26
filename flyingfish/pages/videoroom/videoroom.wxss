@@ -95,6 +95,9 @@
   background: #fff;
   z-index: 200;
 }
+.btn-area .bottom.bottom1 input{
+  z-index: 201;
+}
 
 button::after {
   border: none;
