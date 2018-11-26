@@ -18,7 +18,7 @@ Page({
     classfy: false,
     select: 0,
     ang: 270,
-    right: -100,
+    right: -60,
     clicknumber: 0,
     iszhezhao: "none"
   },

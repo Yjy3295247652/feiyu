@@ -13,8 +13,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.4.0",
-	"appid": "wx3c60d70dfaad4491",
-	"projectname": "feiyu",
+	"appid": "wx7aa1e70f6dcc70a5",
+	"projectname": "fly",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -36,8 +36,15 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "room",
+					"pathName": "pages/index/index",
+					"query": ""
+				}
+			]
 		}
 	}
 }
