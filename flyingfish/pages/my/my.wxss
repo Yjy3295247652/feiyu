@@ -148,7 +148,7 @@
 
 .q2 {
   width: 125rpx;
-  height: 125rpx;
+  height: 128rpx;
   border: 1px #007aff solid;
   border-radius: 50%;
   text-align: center;

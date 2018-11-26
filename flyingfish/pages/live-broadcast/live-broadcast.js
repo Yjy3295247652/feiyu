@@ -195,10 +195,10 @@ Page({
       duration: 500,
       timingFunction: 'ease-out'
     })
-    animationPlus.rotateZ(180).step();
-    animationcollect.translate(-30, -35).rotateZ(360).opacity(1).step();
-    animationTranspond.translate(-60, 0).rotateZ(360).opacity(1).step();
-    animationInput.translate(-30, 35).rotateZ(360).opacity(1).step();
+    animationPlus.translate(-25,-10).step();
+    animationcollect.translate(-30, -65).rotateZ(360).opacity(1).step();
+    animationTranspond.translate(-75, -55).rotateZ(360).opacity(1).step();
+    animationInput.translate(-85, -20).rotateZ(360).opacity(1).step();
     this.setData({
       animPlus: animationPlus.export(),
       animCollect: animationcollect.export(),
@@ -225,7 +225,7 @@ Page({
       duration: 500,
       timingFunction: 'ease-out'
     })
-    animationPlus.rotateZ(0).step();
+    animationPlus.translate(0, 0).step();
     animationcollect.translate(0, 0).rotateZ(0).opacity(0).step();
     animationTranspond.translate(0, 0).rotateZ(0).opacity(0).step();
     animationInput.translate(0, 0).rotateZ(0).opacity(0).step();

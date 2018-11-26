@@ -88,4 +88,4 @@
 <image src="/image/collect.png" class="img-style" animation="{{animCollect}}" bindtap="collect"></image>
 <image src="/image/transpond.png" class="img-style" animation="{{animTranspond}}" bindtap="transpond"></image>
 <image src="/image/shouye.png" class="img-style" animation="{{animInput}}" bindtap="goIndex"></image>
-<image src="/image/plus.png" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>
+<image src="/image/dian.jpg" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>
