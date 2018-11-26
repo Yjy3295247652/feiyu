@@ -34,6 +34,17 @@
 		},
 		"game": {
 			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "room",
+					"pathName": "pages/index/index",
+					"query": ""
+				}
+			]
 		}
 	}
 }
