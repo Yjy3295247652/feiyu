@@ -35,15 +35,8 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
-			"list": [
-				{
-					"id": -1,
-					"name": "live-broadcast",
-					"pathName": "pages/videoroom/videoroom",
-					"query": ""
-				}
-			]
+			"current": -1,
+			"list": []
 		}
 	}
 }

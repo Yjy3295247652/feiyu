@@ -53,11 +53,11 @@ Page({
       this.setData({
         userInfo: e.detail.userInfo
       })
-      setTimeout(function(){
+      setTimeout(function() {
         that.setData({
           qwer: true
         })
-      },400)
+      }, 400)
       var openId = wx.getStorageSync("openId")
       if (openId) {
         wx.reLaunch({
@@ -88,8 +88,10 @@ Page({
               userInfo: that.data.userInfo
             },
             success(res) {
-              wx.setStorageSync("sessionId", res.data.sessionId);
               wx.setStorageSync("openId", res.data.openId);
+              wx.setStorageSync("userId", res.data.userId);
+              wx.setStorageSync("userInfoId", res.data.userInfoId);
+              wx.setStorageSync("userName", res.data.userName);
               if (res.data.code == 0 && res.data.data == true) {
                 wx.reLaunch({
                   url: '../index/index',
@@ -131,7 +133,10 @@ Page({
           encrypt: e.detail
         },
         header: {
-          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+          "openId": wx.getStorageSync("openId"),
+          "userId": wx.getStorageSync("userId"),
+          "userInfoId": wx.getStorageSync("userInfoId"),
+          "userName": wx.getStorageSync("userName")
         },
         success(res) {
           console.log(res.data)
@@ -159,7 +164,10 @@ Page({
       wx.request({
         url: this.data.feiyu + '/phone/login/register_sms?jbPhone=' + this.data.phoneNumber,
         header: {
-          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+          "openId": wx.getStorageSync("openId"),
+          "userId": wx.getStorageSync("userId"),
+          "userInfoId": wx.getStorageSync("userInfoId"),
+          "userName": wx.getStorageSync("userName")
         },
         success(res) {
           wx.showToast({
@@ -192,7 +200,10 @@ Page({
       wx.request({
         url: that.data.feiyu + '/phone/login/bindPhone?smsCode=' + that.data.smsCode,
         header: {
-          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+          "openId": wx.getStorageSync("openId"),
+          "userId": wx.getStorageSync("userId"),
+          "userInfoId": wx.getStorageSync("userInfoId"),
+          "userName": wx.getStorageSync("userName")
         },
         success(res) {
           console.log(res)

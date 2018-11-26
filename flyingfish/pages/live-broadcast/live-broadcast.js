@@ -43,7 +43,10 @@ Page({
         wx.request({
           url: this.data.feiyu + '/phone/course/course_chapter?courseId=' + this.data.courseId,
           header: {
-            "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+            "openId": wx.getStorageSync("openId"),
+            "userId": wx.getStorageSync("userId"),
+            "userInfoId": wx.getStorageSync("userInfoId"),
+            "userName": wx.getStorageSync("userName")
           },
           success: res => {
             if (res.data) {
@@ -64,7 +67,10 @@ Page({
       wx.request({
         url: this.data.feiyu + '/phone/course/course_chapter?courseId=' + this.data.courseId,
         header: {
-          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+          "openId": wx.getStorageSync("openId"),
+          "userId": wx.getStorageSync("userId"),
+          "userInfoId": wx.getStorageSync("userInfoId"),
+          "userName": wx.getStorageSync("userName")
         },
         success: res => {
           if (res.data) {
@@ -84,7 +90,10 @@ Page({
     wx.request({
       url: this.data.feiyu + '/phone/course/course_collect',
       header: {
-        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        "openId": wx.getStorageSync("openId"),
+        "userId": wx.getStorageSync("userId"),
+        "userInfoId": wx.getStorageSync("userInfoId"),
+        "userName": wx.getStorageSync("userName")
       },
       data: {
         courseId: that.data.courseId
@@ -105,7 +114,10 @@ Page({
     wx.request({
       url: that.data.feiyu + '/phone/course/course_uncollect',
       header: {
-        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        "openId": wx.getStorageSync("openId"),
+        "userId": wx.getStorageSync("userId"),
+        "userInfoId": wx.getStorageSync("userInfoId"),
+        "userName": wx.getStorageSync("userName")
       },
       data: {
         courseId: that.data.courseId
@@ -121,19 +133,19 @@ Page({
       }
     })
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     return {
       title: '飞鱼学院',
       path: '/pages/live-broadcast/live-broadcast?isshare=1',
-      success: function (res) {
+      success: function(res) {
         // 转发成功
       },
-      fail: function (res) {
+      fail: function(res) {
         // 转发失败
       }
     }
   },
-  goIndex(){
+  goIndex() {
     wx.reLaunch({
       url: '/pages/index/index',
     })
@@ -142,7 +154,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options);
     if (options.isshare == 1) {
       console.log('是分享进入');
     }
