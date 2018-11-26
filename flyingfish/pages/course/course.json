@@ -1,4 +1,8 @@
 {
+  "window": {
+    "enablePullDownRefresh": false,
+    "disableScroll":true
+  },
   "usingComponents":{
     "myList":"/components/myList/myList"
   }

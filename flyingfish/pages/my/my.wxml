@@ -21,27 +21,27 @@
   </view>
 </view>
 <view class='content'>
-    <navigator class='nei' hover-class='none' url='/pages/collectedCourses/collectedCourses'>
+    <navigator class='nei' hover-class='none' url='/pages/course/course?select=3'>
       <image src='/image/my/live-broadcast.png'></image>
       <view class='nei-name'>已收藏课程</view>
     </navigator>
-    <navigator class='nei' hover-class='none' url='/pages/purchasedCourses/purchasedCourses'>
+    <navigator class='nei' hover-class='none' url='/pages/course/course?select=2'>
       <image src='/image/my/course.png'></image>
       <view class='nei-name'>已购买课程</view>
     </navigator>
-    <navigator class='nei' hover-class='none' url='/pages/watchingHistory/watchingHistory'>
+    <navigator class='nei' hover-class='none' url='/pages/course/course?select=1'>
       <image src='/image/my/history.png'></image>
       <view class='nei-name'>观看历史</view>
     </navigator>
-    <navigator class='nei' hover-class='none' url='/pages/popularActivity/popularActivity'>
+    <navigator class='nei' hover-class='none' url='/pages/waiting/waiting'>
       <image src='/image/my/activity.png'></image>
       <view class='nei-name'>热门活动</view>
     </navigator>
-    <navigator class='nei' hover-class='none' url='/pages/install/install'>
+    <navigator class='nei' hover-class='none' url='/pages/waiting/waiting'>
       <image src='/image/my/set-up.png'></image>
       <view class='nei-name'>设置</view>
     </navigator>
-    <navigator class='nei' hover-class='none' url=''>
+    <navigator class='nei' hover-class='none' url='/pages/waiting/waiting'>
       <image src='/image/my/expect.png'></image>
       <view class='nei-name'>敬请期待</view>
     </navigator>

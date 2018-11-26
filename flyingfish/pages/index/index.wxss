@@ -60,8 +60,8 @@
 }
 
 .bought {
-  width: 180rpx;
-  height: 180rpx;
+  width: 100rpx;
+  height: 222rpx;
   position: fixed;
   bottom: 60rpx;
   z-index: 2;

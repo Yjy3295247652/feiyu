@@ -18,7 +18,7 @@ Page({
     classfy: false,
     select: 0,
     ang: 270,
-    right: -100,
+    right: -60,
     clicknumber: 0,
     iszhezhao: "none"
   },
@@ -50,7 +50,10 @@ Page({
       wx.request({
         url: that.data.feiyu + '/phone/course/buyedCourse',
         header: {
-          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+          "openId": wx.getStorageSync("openId"),
+          "userId": wx.getStorageSync("userId"),
+          "userInfoId": wx.getStorageSync("userInfoId"),
+          "userName": wx.getStorageSync("userName")
         },
         method: "GET",
         success: res => {
@@ -111,7 +114,10 @@ Page({
     wx.request({
       url: this.data.feiyu + '/phone/course/findDirectionAndClass',
       header: {
-        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        "openId": wx.getStorageSync("openId"),
+        "userId": wx.getStorageSync("userId"),
+        "userInfoId": wx.getStorageSync("userInfoId"),
+        "userName": wx.getStorageSync("userName")
       },
       success: res => {
         if (res.data && res.statusCode == '200') {
@@ -133,7 +139,10 @@ Page({
       wx.request({
         url: this.data.feiyu + '/phone/course/findCourse?directionId=' + this.data.directionId + '&classfyId=' + this.data.classfyId,
         header: {
-          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+          "openId": wx.getStorageSync("openId"),
+          "userId": wx.getStorageSync("userId"),
+          "userInfoId": wx.getStorageSync("userInfoId"),
+          "userName": wx.getStorageSync("userName")
         },
         success: res => {
           this.setData({
@@ -159,7 +168,10 @@ Page({
     wx.request({
       url: this.data.feiyu + '/phone/course/findCarouse',
       header: {
-        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        "openId": wx.getStorageSync("openId"),
+        "userId": wx.getStorageSync("userId"),
+        "userInfoId": wx.getStorageSync("userInfoId"),
+        "userName": wx.getStorageSync("userName")
       },
       success: res => {
         if (res.data) {

@@ -91,8 +91,8 @@
 }
 
 .qiandao {
-  width: 200rpx;
-  height: 200rpx;
+  width: 140rpx;
+  height: 140rpx;
   background: #007aff;
   border-radius: 50%;
   position: absolute;
@@ -107,8 +107,8 @@
 }
 
 .q1 {
-  width: 180rpx;
-  height: 180rpx;
+  width: 140rpx;
+  height: 140rpx;
   background: #fff;
   border-radius: 50%;
   box-sizing: border-box;
@@ -121,8 +121,8 @@
 
 @keyframes qian {
   0% {
-    width: 160rpx;
-    height: 160rpx;
+    width: 125rpx;
+    height: 125rpx;
   }
 
   25% {
@@ -141,14 +141,14 @@
   }
 
   100% {
-    width: 160rpx;
-    height: 160rpx;
+    width: 125rpx;
+    height: 125rpx;
   }
 }
 
 .q2 {
-  width: 160rpx;
-  height: 160rpx;
+  width: 125rpx;
+  height: 125rpx;
   border: 1px #007aff solid;
   border-radius: 50%;
   text-align: center;
@@ -162,8 +162,8 @@
 }
 
 .q2 .text1 {
-  height: 160rpx;
-  line-height: 160rpx;
-  font-size: 36rpx;
+  height: 140rpx;
+  line-height: 125rpx;
+  font-size: 30rpx;
   color: #007aff;
 }

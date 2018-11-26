@@ -13,7 +13,12 @@ Page({
     videoId: '',
     collectText: false,
     isBuy: '',
-    imaSrc: ''
+    imaSrc: '',
+    isPopping: false,//是否已经弹出
+    animPlus: {},//旋转动画
+    animCollect: {},//item位移,透明度
+    animTranspond: {},//item位移,透明度
+    animInput: {},//item位移,透明度
   },
   navbarTap: function(e) {
     this.setData({
@@ -43,7 +48,10 @@ Page({
         wx.request({
           url: this.data.feiyu + '/phone/course/course_chapter?courseId=' + this.data.courseId,
           header: {
-            "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+            "openId": wx.getStorageSync("openId"),
+            "userId": wx.getStorageSync("userId"),
+            "userInfoId": wx.getStorageSync("userInfoId"),
+            "userName": wx.getStorageSync("userName")
           },
           success: res => {
             if (res.data) {
@@ -64,7 +72,10 @@ Page({
       wx.request({
         url: this.data.feiyu + '/phone/course/course_chapter?courseId=' + this.data.courseId,
         header: {
-          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+          "openId": wx.getStorageSync("openId"),
+          "userId": wx.getStorageSync("userId"),
+          "userInfoId": wx.getStorageSync("userInfoId"),
+          "userName": wx.getStorageSync("userName")
         },
         success: res => {
           if (res.data) {
@@ -78,13 +89,16 @@ Page({
       })
     }
   },
-  // 获取收藏课程
+  // 收藏课程
   getCollectCourse() {
     var that = this;
     wx.request({
       url: this.data.feiyu + '/phone/course/course_collect',
       header: {
-        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        "openId": wx.getStorageSync("openId"),
+        "userId": wx.getStorageSync("userId"),
+        "userInfoId": wx.getStorageSync("userInfoId"),
+        "userName": wx.getStorageSync("userName")
       },
       data: {
         courseId: that.data.courseId
@@ -105,7 +119,10 @@ Page({
     wx.request({
       url: that.data.feiyu + '/phone/course/course_uncollect',
       header: {
-        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        "openId": wx.getStorageSync("openId"),
+        "userId": wx.getStorageSync("userId"),
+        "userInfoId": wx.getStorageSync("userInfoId"),
+        "userName": wx.getStorageSync("userName")
       },
       data: {
         courseId: that.data.courseId
@@ -121,10 +138,116 @@ Page({
       }
     })
   },
+  onShareAppMessage: function() {
+    return {
+      title: '飞鱼学院',
+      path: '/pages/live-broadcast/live-broadcast?isshare=1',
+      success: function(res) {
+        // 转发成功
+      },
+      fail: function(res) {
+        // 转发失败
+      }
+    }
+  },
+  //点击弹出
+  plus: function () {
+    if (this.data.isPopping) {
+      //缩回动画
+      this.popp();
+      this.setData({
+        isPopping: false
+      })
+    } else if (!this.data.isPopping) {
+      //弹出动画
+      this.takeback();
+      this.setData({
+        isPopping: true
+      })
+    }
+  },
+  input: function () {
+    console.log("input")
+  },
+  transpond: function () {
+    console.log("transpond")
+  },
+  collect: function () {
+    console.log("collect")
+  },
+
+  //弹出动画
+  popp: function () {
+    //plus顺时针旋转
+    var animationPlus = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    var animationcollect = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    var animationTranspond = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    var animationInput = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    animationPlus.rotateZ(180).step();
+    animationcollect.translate(-30, -35).rotateZ(360).opacity(1).step();
+    animationTranspond.translate(-60, 0).rotateZ(360).opacity(1).step();
+    animationInput.translate(-30, 35).rotateZ(360).opacity(1).step();
+    this.setData({
+      animPlus: animationPlus.export(),
+      animCollect: animationcollect.export(),
+      animTranspond: animationTranspond.export(),
+      animInput: animationInput.export(),
+    })
+  },
+  //收回动画
+  takeback: function () {
+    //plus逆时针旋转
+    var animationPlus = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    var animationcollect = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    var animationTranspond = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    var animationInput = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    animationPlus.rotateZ(0).step();
+    animationcollect.translate(0, 0).rotateZ(0).opacity(0).step();
+    animationTranspond.translate(0, 0).rotateZ(0).opacity(0).step();
+    animationInput.translate(0, 0).rotateZ(0).opacity(0).step();
+    this.setData({
+      animPlus: animationPlus.export(),
+      animCollect: animationcollect.export(),
+      animTranspond: animationTranspond.export(),
+      animInput: animationInput.export(),
+    })
+  },
+  goIndex() {
+    wx.reLaunch({
+      url: '/pages/index/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if (options.isshare == 1) {
+      console.log('是分享进入');
+    }
     this.setData({
       courseId: options.courseId,
       price: options.price
@@ -132,6 +255,8 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
+    this.getname();
+    this.getlistdata();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -139,19 +264,16 @@ Page({
   onReady: function() {
 
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.getname();
-    this.getlistdata();
     var that = this
-    setTimeout(function(){
+    setTimeout(function() {
       that.setData({
         imgSrc: that.data.feiyu + '/' + that.data.listdata.course.course_image_address
       })
-    },400)
+    }, 400)
     wx.hideLoading()
   },
 
@@ -173,7 +295,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    this.getlistdata();
+    setTimeout(function() {
+      wx.stopPullDownRefresh()
+    }, 500)
   },
 
   /**

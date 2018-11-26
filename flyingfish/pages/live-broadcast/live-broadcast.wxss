@@ -146,7 +146,7 @@ button::after {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border-bottom: 2rpx solid #ececec;
+  border-bottom: 2rpx dashed #ececec;
   box-sizing: border-box;
 }
 
@@ -303,7 +303,7 @@ button::after {
   box-sizing: border-box;
   display: flex;
   justify-content: flex-start;
-  border-bottom: 2rpx dashed #ececec;
+  border-bottom: 2rpx solid #ececec;
   color: #333;
 }
 
@@ -320,4 +320,24 @@ button::after {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.img-plus-style {
+  height: 60rpx;
+  width: 60rpx;
+  position: absolute;
+  bottom: 400rpx;
+  right: 20rpx;
+  z-index: 100;
+  background: #6eafdc;
+  border-radius: 50%;
+}
+
+.img-style {
+  height: 70rpx;
+  width: 70rpx;
+  position: absolute;
+  bottom: 400rpx;
+  right: 20rpx;
+  opacity: 0;
 }

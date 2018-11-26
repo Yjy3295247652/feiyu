@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    feiyu:'',
-    listdata:[]
+    feiyu: '',
+    listdata: []
   },
 
   //获取域名
@@ -17,13 +17,16 @@ Page({
     })
   },
   // 获取购买课程
-  getBuyedCourse(){
+  getBuyedCourse() {
     wx.request({
       url: this.data.feiyu + '/phone/course/buyedCourse',
       header: {
-        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        "openId": wx.getStorageSync("openId"),
+        "userId": wx.getStorageSync("userId"),
+        "userInfoId": wx.getStorageSync("userInfoId"),
+        "userName": wx.getStorageSync("userName")
       },
-      success(res){
+      success(res) {
         console.log(res.data)
       }
     })
@@ -31,7 +34,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.getname();
     this.getBuyedCourse();
   },
@@ -39,49 +42,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

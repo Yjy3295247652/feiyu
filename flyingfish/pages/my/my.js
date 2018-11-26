@@ -33,17 +33,20 @@ Page({
       wx.request({
         url: that.data.feiyu + '/phone/login/personSignIn',
         header: {
-          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+          "openId": wx.getStorageSync("openId"),
+          "userId": wx.getStorageSync("userId"),
+          "userInfoId": wx.getStorageSync("userInfoId"),
+          "userName": wx.getStorageSync("userName")
         },
         success(res) {
           if (res.data.code == 0) {
             wx.showToast({
               title: '签到成功，加20积分',
             })
-            this.getUserInfomation();
             that.setData({
               isSignIn: "已签到"
             })
+            that.getUserInfomation();
           } else {
             wx.showToast({
               title: '签到失败，请重新签到',
@@ -68,7 +71,10 @@ Page({
     wx.request({
       url: that.data.feiyu + '/phone/login/isSignIn',
       header: {
-        "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+        "openId": wx.getStorageSync("openId"),
+        "userId": wx.getStorageSync("userId"),
+        "userInfoId": wx.getStorageSync("userInfoId"),
+        "userName": wx.getStorageSync("userName")
       },
       success(res) {
         if (res.data.code == 0 && res.data.isSignIn == true) {
@@ -90,13 +96,16 @@ Page({
   },
   // 获取用户信息
   getUserInfomation() {
-    var sessionId = wx.getStorageSync("sessionId");
+    var openId = wx.getStorageSync("openId");
     var that = this;
-    if (sessionId) {
+    if (openId) {
       wx.request({
         url: this.data.feiyu + '/phone/login/personal_basic',
         header: {
-          "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId")
+          "openId": wx.getStorageSync("openId"),
+          "userId": wx.getStorageSync("userId"),
+          "userInfoId": wx.getStorageSync("userInfoId"),
+          "userName": wx.getStorageSync("userName")
         },
         success(res) {
           that.setData({
@@ -127,10 +136,21 @@ Page({
       })
     }
   },
+  checkIsLogin(){
+    var openId = wx.getStorageSync("openId")
+    if(openId){
+
+    }else{
+      wx.reLaunch({
+        url: '/pages/login/login',
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.checkIsLogin();
     this.getname();
     this.getUserInfomation();
     this.checkQiandao();
