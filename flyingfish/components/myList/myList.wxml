@@ -1,5 +1,5 @@
 <view>
-  <view wx:for="{{listdata}}">
+  <view wx:for="{{listdata}}" wx:key="{{index}}">
   <slide-view class="slide" width="750" height="242" slideWidth="150">
     <view slot="left" class='l'>
       <view class='list-lis'>
@@ -20,6 +20,7 @@
                     <view class='price_number' wx:if="{{item.level == 1}}">初级</view>
                     <view class='price_number' wx:if="{{item.level == 2}}">中级</view>
                     <view class='price_number' wx:if="{{item.level == 3}}">高级</view>
+                    <view class='price_num' wx:if="{{item.coursePrice > 0}}">￥{{item.coursePrice}}</view>
                   </view>
                 </view>
                 <!-- 已购 -->

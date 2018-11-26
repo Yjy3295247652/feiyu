@@ -40,7 +40,7 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "room",
+					"name": "index",
 					"pathName": "pages/index/index",
 					"query": ""
 				}

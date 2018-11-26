@@ -241,13 +241,23 @@ Page({
       url: '/pages/index/index',
     })
   },
+  //立即购买
+  toBuy(){
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000;
+    console.log("当前时间戳为：" + timestamp);
+    wx.requestPayment({
+      timeStamp: '',
+      nonceStr: '',
+      package: '',
+      signType: '',
+      paySign: 'MD5',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (options.isshare == 1) {
-      console.log('是分享进入');
-    }
     this.setData({
       courseId: options.courseId,
       price: options.price
@@ -255,8 +265,7 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
-    this.getname();
-    this.getlistdata();
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -268,12 +277,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.getname();
+    this.getlistdata();
     var that = this
     setTimeout(function() {
       that.setData({
         imgSrc: that.data.feiyu + '/' + that.data.listdata.course.course_image_address
       })
-    }, 400)
+    }, 500)
     wx.hideLoading()
   },
 

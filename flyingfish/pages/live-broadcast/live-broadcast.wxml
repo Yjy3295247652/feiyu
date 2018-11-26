@@ -83,7 +83,7 @@
   </view>
 </view>
 <view class='di'></view>
-<view class='enter' wx:if="{{price != 0 && isBuy==0}}">立即购买</view>
+<view class='enter' wx:if="{{price != 0 && isBuy==0}}" bindtap='toBuy'>立即购买</view>
 <view class='enter' wx:if="{{price != 0 && isBuy==1}}">已购买</view>
 <image src="/image/collect.png" class="img-style" animation="{{animCollect}}" bindtap="collect"></image>
 <image src="/image/transpond.png" class="img-style" animation="{{animTranspond}}" bindtap="transpond"></image>

@@ -110,7 +110,6 @@ Page({
           },
           method: "get",
           success: res => {
-            console.log(res);
             if (res.data.code == 0) {
               var arr = res.data.courseList;
               var list = [];
@@ -163,7 +162,6 @@ Page({
         "userName": wx.getStorageSync("userName")
       },
       success: res => {
-        console.log(res);
         if (res.data.code == 0) {
           if (res.data.buyedCoursesList == null) {
             wx.showToast({
@@ -208,7 +206,6 @@ Page({
           },
           method: "get",
           success: res => {
-            console.log(res);
             if (res.data.code == 0) {
               var arr = res.data.courseList;
               var list = [];
