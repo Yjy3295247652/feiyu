@@ -32,7 +32,10 @@ Page({
     isCommen: false,
     commenText: "",
     scrollTop: 0,
-    isLike: true
+    isLike: false,
+    isGoodShow: false,
+    currentComment: null,
+    goodNum:''
   },
   //获取域名
   getname() {
@@ -93,7 +96,6 @@ Page({
           "userName": wx.getStorageSync("userName")
         },
         success(res) {
-          console.log(res.data)
           res.data.commentAndReply.forEach(function(val, index) {
             val.comment.isGood = false;
           });
@@ -101,10 +103,6 @@ Page({
             chapter: res.data.chapter,
             commentAndReply: res.data.commentAndReply
           });
-          //设置页面标题
-          wx.setNavigationBarTitle({
-            title: that.data.chapter.chapter_info
-          })
           if (res.data.code == 0) {
             that.setData({
               chapter: res.data.chapter,
@@ -125,12 +123,14 @@ Page({
       })
     }
   },
+  //获取评论
   getReply(e) {
     e.currentTarget.dataset.reply.index = e.currentTarget.dataset.index;
     this.setData({
       reply: e.currentTarget.dataset.reply,
       flag: 1,
-      scrollTop: 0
+      scrollTop: 0,
+      goodNum: e.currentTarget.dataset.reply.comment.good
     });
   },
   /**
@@ -143,28 +143,27 @@ Page({
     this.setData({
       chapterId: options.videoId
     })
-    this.getname();
-    this.getChapterCommentList()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    this.videoContext = wx.createVideoContext('myVideo')
-    query = wx.createSelectorQuery();
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.getname();
+    this.getChapterCommentList()
     var that = this;
     setTimeout(function() {
       that.setData({
         src: that.data.chapter.video_address
       })
-    }, 400)
+    }, 500)
     wx.hideLoading();
   },
 
@@ -240,61 +239,70 @@ Page({
     clearInterval(interval); // 清除setInterval
     time = 0;
   },
-  like(e) {
-    console.log(this.data.isLike);
-    if (!this.data.isLike) {
-      return;
-    }
-    this.setData({
-      isLike: false
-    });
-    let id = e.currentTarget.dataset.id;
-    let that = this;
-    let commentAndReply = that.data.commentAndReply;
-    let url = "";
-    if (e.currentTarget.dataset.isgood) {
-      url = that.data.feiyu + "/phone/course/comment_good_down"
+  //点赞
+  hotZan(e) {
+    if (this.data.isLike) {
+      return 0;
     } else {
-      url = that.data.feiyu + "/phone/course/comment_good"
-    }
-    wx.request({
-      url: url,
-      data: {
-        commentId: id
-      },
-      success(res) {
-        console.log(1);
-        if (res.data.msg == "点赞成功") {
-          commentAndReply[e.currentTarget.dataset.index].comment.isGood = true;
-          commentAndReply[e.currentTarget.dataset.index].comment.good = res.data.good;
-          that.setData({
-            commentAndReply: commentAndReply,
-            isLike: true
-          });
-          let reply = commentAndReply[e.currentTarget.dataset.index];
-          reply.index = e.currentTarget.dataset.index;
-          if (that.data.flag != 0) {
-            that.setData({
-              reply: reply
+      this.setData({
+        isLike: true
+      })
+      wx.request({
+        url: this.data.feiyu + '/phone/course/comment_good?commentId=' + e.currentTarget.dataset.comment.id,
+        success: res => {
+          if (res.data.code == 0) {
+            wx.showToast({
+              title: '点赞成功',
             })
-          }
-        } else if (res.data.message == "点灭成功") {
-          commentAndReply[e.currentTarget.dataset.index].comment.isGood = false;
-          commentAndReply[e.currentTarget.dataset.index].comment.good = res.data.good;
-          that.setData({
-            commentAndReply: commentAndReply,
-            isLike: true
-          });
-          let reply = commentAndReply[e.currentTarget.dataset.index];
-          reply.index = e.currentTarget.dataset.index;
-          if (that.data.flag != 0) {
-            that.setData({
-              reply: reply
+            this.setData({
+              currentComment: e.currentTarget.dataset.comment,
+              isGoodShow: true,
+              goodNum: this.data.goodNum * 1 + 1
+            })
+            this.getChapterCommentList();
+            this.send();
+          } else {
+            wx.showToast({
+              title: '点赞失败',
+              icon: 'none'
             })
           }
         }
-      }
-    })
+      })
+    }
+  },
+  //取消赞
+  cancelZan(e) {
+    if (!this.data.isLike) {
+      return 0;
+    } else {
+      this.setData({
+        isLike: false
+      })
+      wx.request({
+        url: this.data.feiyu + '/phone/course/comment_good_down?commentId=' + e.currentTarget.dataset.comment.id,
+        success: res => {
+          if (res.data.code == 0) {
+            wx.showToast({
+              title: '取消成功',
+              icon: 'none'
+            })
+            this.setData({
+              currentComment: e.currentTarget.dataset.comment,
+              isGoodShow: false,
+              goodNum: this.data.goodNum * 1 - 1
+            })
+            this.getChapterCommentList();
+            this.send();
+          } else {
+            wx.showToast({
+              title: '取消失败',
+              icon: 'none'
+            })
+          }
+        }
+      })
+    }
   },
   comment() {
     let that = this;
@@ -321,14 +329,17 @@ Page({
     if (this.data.commenText != "") {
       let that = this;
       wx.request({
-        url: that.data.feiyu + "//phone/course/chapter_comment_reply",
+        url: that.data.feiyu + "/phone/course/chapter_comment_reply",
         data: {
           commentId: that.data.reply.comment.id,
           replyUserId: that.data.reply.comment.userId,
           reply: that.data.commenText
         },
         header: {
-          Cookie: "JSESSIONID=" + wx.getStorageSync("sessionId")
+          "openId": wx.getStorageSync("openId"),
+          "userId": wx.getStorageSync("userId"),
+          "userInfoId": wx.getStorageSync("userInfoId"),
+          "userName": wx.getStorageSync("userName")
         },
         success(res) {
           if (res.data.code == 0) {
