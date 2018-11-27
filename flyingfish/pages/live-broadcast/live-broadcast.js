@@ -187,15 +187,14 @@ Page({
         "userName": wx.getStorageSync("userName")
       },
       success: res => {
-        console.log(res.data)
         wx.requestPayment({
-          timeStamp: '',
-          nonceStr: '',
-          package: '',
-          signType: '',
-          paySign: 'MD5',
-          success: res => {
-            console.log(res.data)
+          timeStamp: res.data.obj.timeStamp,
+          nonceStr: res.data.obj.nonceStr,
+          package: res.data.obj.package,
+          signType: res.data.obj.signType,
+          paySign: res.data.obj.paySign,
+          success: msg => {
+            console.log(msg.data)
             this.setData({
               toBuy: 1,
               isBuy: 1
@@ -204,13 +203,14 @@ Page({
               title: '购买成功',
             })
           },
-          fail: res => {
+          fail: msg => {
+            console.log(msg.data)
             this.setData({
               toBuy: 1,
               isBuy: 1
             })
             wx.showToast({
-              title: '失败，模拟成功',
+              title: '购买失败',
             })
           }
         })

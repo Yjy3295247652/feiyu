@@ -27,8 +27,8 @@
                 <view wx:if="{{selected === 2}}">
                   <view class='span'>订单号：{{item.orderNumber}}</view>
                   <view class='price'>
-                    <view class='price_text'>￥</view>
-                    <view class='price_number'>{{item.coursePrice}}</view>
+                    <view class='price_text'>￥{{item.coursePrice}}</view>
+                    <view class='price_number'></view>
                   </view>
 
                 </view>
