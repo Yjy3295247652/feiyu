@@ -83,14 +83,14 @@
   </view>
 </view>
 <view class='di'></view>
-<view class='enter' wx:if="{{price != 0 && isBuy==0}}" bindtap='toBuy'>立即购买</view>
-<view class='enter' wx:if="{{price != 0 && isBuy==1}}">已购买</view>
+<view class='enter' wx:if="{{price != 0 && isBuy==0}}" bindtap='toBuyVideo'>立即购买</view>
+<!-- <view class='enter' wx:if="{{price != 0 && isBuy==1}}">已购买</view> -->
 <image src="/image/collect.png" class="img-style" animation="{{animCollect}}" bindtap="collect"></image>
 <image src="/image/transpond.png" class="img-style" animation="{{animTranspond}}" bindtap="transpond"></image>
 <image src="/image/shouye.png" class="img-style" animation="{{animInput}}" bindtap="goIndex"></image>
 <image src="/image/dian.jpg" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>
 
-<view class='purchase' wx:if="{{price != 0 && isBuy==0}}">
+<view class='purchase' wx:if="{{price != 0 && toBuy==0}}">
   <view class='purchase-frame'>
     <view class='frame-title'>课程购买</view>
     <view class='frame-content'>

@@ -15,6 +15,7 @@ Page({
     isBuy: '',
     imaSrc: '',
     manImgSrc: '',
+    toBuy: 1,
     isPopping: false, //是否已经弹出
     animPlus: {}, //旋转动画
     animCollect: {}, //item位移,透明度
@@ -34,37 +35,41 @@ Page({
   },
   // 去播放视频
   getVideo(e) {
-    this.setData({
-      videoId: e.currentTarget.dataset.id,
-    });
-    wx.request({
-      url: this.data.feiyu + '/phone/course/saveStudyByCourse',
-      header: {
-        "openId": wx.getStorageSync("openId"),
-        "userId": wx.getStorageSync("userId"),
-        "userInfoId": wx.getStorageSync("userInfoId"),
-        "userName": wx.getStorageSync("userName")
-      },
-      data: {
-        courseId: this.data.courseId,
-        chapterId: e.currentTarget.dataset.id
-      },
-      success: res => {
-        if(res.data.code == 0){
-          wx.navigateTo({
-            url: '/pages/videoroom/videoroom?videoId=' + this.data.videoId,
-          })
-        }else if(res.data.code == 1){
-          wx.showToast({
-            title: '加入学习失败',
-            icon:'none'
-          })
-          wx.navigateTo({
-            url: '/pages/videoroom/videoroom?videoId=' + this.data.videoId,
-          })
+    if (this.data.price > 0 && this.data.isBuy == 0) {
+      this.toBuyVideo();
+    } else {
+      this.setData({
+        videoId: e.currentTarget.dataset.id,
+      });
+      wx.request({
+        url: this.data.feiyu + '/phone/course/saveStudyByCourse',
+        header: {
+          "openId": wx.getStorageSync("openId"),
+          "userId": wx.getStorageSync("userId"),
+          "userInfoId": wx.getStorageSync("userInfoId"),
+          "userName": wx.getStorageSync("userName")
+        },
+        data: {
+          courseId: this.data.courseId,
+          chapterId: e.currentTarget.dataset.id
+        },
+        success: res => {
+          if (res.data.code == 0) {
+            wx.navigateTo({
+              url: '/pages/videoroom/videoroom?videoId=' + this.data.videoId,
+            })
+          } else if (res.data.code == 1) {
+            wx.showToast({
+              title: '加入学习失败',
+              icon: 'none'
+            })
+            wx.navigateTo({
+              url: '/pages/videoroom/videoroom?videoId=' + this.data.videoId,
+            })
+          }
         }
-      }
-    })
+      })
+    }
   },
   // 获取视频列表信息
   getlistdata() {
@@ -268,39 +273,52 @@ Page({
     })
   },
   //立即购买
-  toBuy() {
-    var timestamp = Date.parse(new Date());
-    timestamp = timestamp / 1000;
-    console.log("当前时间戳为：" + timestamp);
-    wx.requestPayment({
-      timeStamp: '',
-      nonceStr: '',
-      package: '',
-      signType: '',
-      paySign: 'MD5',
+  toBuyVideo() {
+    this.setData({
+      toBuy: 0
+    })
+    wx.request({
+      url: this.data.feiyu + '/phone/wechat/placeOrder?courseId=' + this.data.courseId,
+      header: {
+        "openId": wx.getStorageSync("openId"),
+        "userId": wx.getStorageSync("userId"),
+        "userInfoId": wx.getStorageSync("userInfoId"),
+        "userName": wx.getStorageSync("userName")
+      },
       success:res=>{
         console.log(res.data)
-        this.setData({
-          isBuy: 1
-        })
-        wx.showToast({
-          title: '购买成功',
-        })
-      },
-      fail:res=>{
-        console.log(res.data)
-        this.setData({
-          isBuy:1
-        }),
-        wx.showToast({
-          title: '失败，模拟成功',
+        wx.requestPayment({
+          timeStamp: '',
+          nonceStr: '',
+          package: '',
+          signType: '',
+          paySign: 'MD5',
+          success: res => {
+            console.log(res.data)
+            this.setData({
+              toBuy: 1,
+              isBuy: 1
+            })
+            wx.showToast({
+              title: '购买成功',
+            })
+          },
+          fail: res => {
+            this.setData({
+              toBuy: 1,
+              isBuy: 1
+            })
+            wx.showToast({
+              title: '失败，模拟成功',
+            })
+          }
         })
       }
     })
   },
-  cancel(){
-    wx.reLaunch({
-      url: '/pages/index/index'
+  cancel() {
+    wx.navigateBack({
+      delta: 1
     })
   },
   /**
