@@ -27,6 +27,7 @@ Page({
       currentTab: e.currentTarget.dataset.idx
     })
   },
+  // 获取域名
   getname() {
     var feiyu = getApp().globalData.host;
     this.setData({
@@ -36,7 +37,7 @@ Page({
   // 去播放视频
   getVideo(e) {
     if (this.data.price > 0 && this.data.isBuy == 0) {
-      this.toBuyVideo();
+      this.buyVideo();
     } else {
       this.setData({
         videoId: e.currentTarget.dataset.id,
@@ -169,6 +170,60 @@ Page({
       }
     })
   },
+  //立即购买
+  buyVideo() {
+    this.setData({
+      toBuy: 0
+    })
+  },
+  //确认购买
+  toBuyVideo() {
+    wx.request({
+      url: this.data.feiyu + '/phone/wechat/placeOrder?courseId=' + this.data.courseId,
+      header: {
+        "openId": wx.getStorageSync("openId"),
+        "userId": wx.getStorageSync("userId"),
+        "userInfoId": wx.getStorageSync("userInfoId"),
+        "userName": wx.getStorageSync("userName")
+      },
+      success: res => {
+        console.log(res.data)
+        wx.requestPayment({
+          timeStamp: '',
+          nonceStr: '',
+          package: '',
+          signType: '',
+          paySign: 'MD5',
+          success: res => {
+            console.log(res.data)
+            this.setData({
+              toBuy: 1,
+              isBuy: 1
+            })
+            wx.showToast({
+              title: '购买成功',
+            })
+          },
+          fail: res => {
+            this.setData({
+              toBuy: 1,
+              isBuy: 1
+            })
+            wx.showToast({
+              title: '失败，模拟成功',
+            })
+          }
+        })
+      }
+    })
+  },
+  //取消购买
+  cancel() {
+    this.setData({
+      toBuy: 1
+    })
+  },
+  // 分享
   onShareAppMessage: function() {
     return {
       title: '飞鱼学院',
@@ -270,55 +325,6 @@ Page({
   goIndex() {
     wx.reLaunch({
       url: '/pages/index/index',
-    })
-  },
-  //立即购买
-  toBuyVideo() {
-    this.setData({
-      toBuy: 0
-    })
-    wx.request({
-      url: this.data.feiyu + '/phone/wechat/placeOrder?courseId=' + this.data.courseId,
-      header: {
-        "openId": wx.getStorageSync("openId"),
-        "userId": wx.getStorageSync("userId"),
-        "userInfoId": wx.getStorageSync("userInfoId"),
-        "userName": wx.getStorageSync("userName")
-      },
-      success:res=>{
-        console.log(res.data)
-        wx.requestPayment({
-          timeStamp: '',
-          nonceStr: '',
-          package: '',
-          signType: '',
-          paySign: 'MD5',
-          success: res => {
-            console.log(res.data)
-            this.setData({
-              toBuy: 1,
-              isBuy: 1
-            })
-            wx.showToast({
-              title: '购买成功',
-            })
-          },
-          fail: res => {
-            this.setData({
-              toBuy: 1,
-              isBuy: 1
-            })
-            wx.showToast({
-              title: '失败，模拟成功',
-            })
-          }
-        })
-      }
-    })
-  },
-  cancel() {
-    wx.navigateBack({
-      delta: 1
     })
   },
   /**
