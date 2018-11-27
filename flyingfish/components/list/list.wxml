@@ -10,6 +10,7 @@
     </scroll-view>
   </view>
   <view class='list-lis'>
+    <view class='nothing' wx:if="{{listdata.length == 0}}">该分类暂时还没有课程哦，看看其他吧</view>
     <block wx:for="{{listdata}}" wx:key="{{index}}">
       <navigator class='list_lis_li' hover-class='none' url="/pages/live-broadcast/live-broadcast?courseId={{item.id}}&price={{item.course_price}}">
         <view class='li_pic'>
@@ -21,7 +22,7 @@
             <view class='time'>{{item.course_info}}</view>
           </view>
           <view class='li_content_bottom'>
-          <block wx:if="{{item.course_price}}">
+            <block wx:if="{{item.course_price}}">
               <view class='span'>{{item.student_count}}人正在学习</view>
               <view class='price'>
                 <view class='price_text'>￥</view>

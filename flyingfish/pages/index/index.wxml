@@ -14,7 +14,7 @@
   </scroll-view>
 
   <block wx:if="{{classfy}}">
-    <view class='nohas'>该课程还没有下属分类哦</view>
+    <view class='nohas'>该方向还没有下属分类哦，看看其他吧</view>
   </block>
   <block wx:else>
     <block wx:for="{{navbar}}" wx:key="{{index}}">

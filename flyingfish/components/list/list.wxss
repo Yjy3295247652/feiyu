@@ -200,3 +200,11 @@ scrollbar {
   height: 0;
   color: transparent;
 }
+
+.nothing{
+  width: 100%;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #1296db;
+}
