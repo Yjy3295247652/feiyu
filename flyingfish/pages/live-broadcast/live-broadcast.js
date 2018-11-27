@@ -279,11 +279,21 @@ Page({
       signType: '',
       paySign: 'MD5',
       success:res=>{
+        console.log(res.data)
         this.setData({
           isBuy: 1
         })
-        wx.reLaunch({
-          url: '/pages/live-broadcast/live-broadcast'
+        wx.showToast({
+          title: '购买成功',
+        })
+      },
+      fail:res=>{
+        console.log(res.data)
+        this.setData({
+          isBuy:1
+        }),
+        wx.showToast({
+          title: '失败，模拟成功',
         })
       }
     })
