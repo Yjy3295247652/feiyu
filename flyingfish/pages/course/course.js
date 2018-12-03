@@ -152,41 +152,47 @@ Page({
   },
   //获取已购课程
   getbought: function() {
-    wx.request({
-      url: this.data.feiyu + '/phone/course/buyedCourse',
-      method: "get",
-      header: {
-        "openId": wx.getStorageSync("openId"),
-        "userId": wx.getStorageSync("userId"),
-        "userInfoId": wx.getStorageSync("userInfoId"),
-        "userName": wx.getStorageSync("userName")
-      },
-      success: res => {
-        if (res.data.code == 0) {
-          if (res.data.buyedCoursesList == null) {
-            wx.showToast({
-              title: '还未购买任何课程~~',
-              icon: 'none',
-              duration: 1000
-            })
-          } else {
-            let arr = res.data.buyedCoursesList;
-            for (let i = 0; i < arr.length; i++) {
-              arr[i].endTime = time.formatTimeTwo(arr[i].endTime / 1000, 'Y/M/D');
+    var that = this;
+    wx.showLoading({
+      title: '正在加载',
+      success:res=>{
+        wx.request({
+          url: this.data.feiyu + '/phone/course/buyedCourse',
+          method: "get",
+          header: {
+            "openId": wx.getStorageSync("openId"),
+            "userId": wx.getStorageSync("userId"),
+            "userInfoId": wx.getStorageSync("userInfoId"),
+            "userName": wx.getStorageSync("userName")
+          },
+          success: res => {
+            if (res.data.code == 0) {
+              if (res.data.buyedCoursesList == null) {
+                wx.showToast({
+                  title: '还未购买任何课程~~',
+                  icon: 'none',
+                  duration: 1000
+                })
+              } else {
+                let arr = res.data.buyedCoursesList;
+                for (let i = 0; i < arr.length; i++) {
+                  arr[i].endTime = time.formatTimeTwo(arr[i].endTime / 1000, 'Y/M/D');
+                }
+                this.setData({
+                  coursedata: this.data.coursedata.concat(arr),
+                  selected: 2
+                })
+              }
+            } else {
+              wx.showToast({
+                title: '网络错误',
+                icon: 'none',
+                duration: 1000
+              })
             }
-            this.setData({
-              coursedata: this.data.coursedata.concat(arr),
-              selected: 2
-            })
+            wx.hideLoading();
           }
-        } else {
-          wx.showToast({
-            title: '网络错误',
-            icon: 'none',
-            duration: 1000
-          })
-        }
-        wx.hideLoading();
+        })
       }
     })
   },
