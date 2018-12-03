@@ -35,7 +35,7 @@ Page({
     isLike: false,
     isGoodShow: false,
     currentComment: null,
-    goodNum:''
+    goodNum: ''
   },
   //获取域名
   getname() {
@@ -97,7 +97,16 @@ Page({
         },
         success(res) {
           res.data.commentAndReply.forEach(function(val, index) {
-            val.comment.isGood = false;
+            if (val.comment) {
+              val.comment.isGood = false;
+              if (!val.comment.head_image.match('https')){
+                val.comment.head_image = that.data.feiyu + val.comment.head_image
+              }else{
+                val.comment.head_image = val.comment.head_image
+              }
+            } else {
+
+            }
           });
           that.setData({
             chapter: res.data.chapter,
@@ -221,7 +230,6 @@ Page({
       let absY = Math.abs(tmY);
       if (absX > 2 * absY) {
         if (tmX < 0) {
-          // console.log("左滑=====")
           this.setData({
             flag: 0
           });
@@ -232,7 +240,6 @@ Page({
         }
       }
       if (absY > absX * 2 && tmY < 0) {
-        // console.log("上滑动=====")
       }
       if (absY > absX * 2 && tmY > 0) {}
     }

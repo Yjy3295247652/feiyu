@@ -1,35 +1,12 @@
 // pages/login/login.js
 const app = getApp()
 const query = wx.createSelectorQuery()
-
-// 倒计时事件 单位s
-var countdown = 60;
-var settime = function(that) {
-  if (countdown == 0) {
-    that.setData({
-      codeIsCanClick: true
-    })
-    countdown = 60;
-    return;
-  } else {
-    that.setData({
-      codeIsCanClick: false,
-      last_time: countdown
-    })
-    countdown--;
-  }
-  setTimeout(function() {
-    settime(that)
-  }, 1000)
-}
-
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    hasUserInfo: true,
+    hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: '',
     code: 0,
@@ -40,12 +17,14 @@ Page({
     phoneNumber: '',
     qwer: null
   },
+  //获取域名
   getname() {
     var feiyu = getApp().globalData.host;
     this.setData({
       feiyu: feiyu
     })
   },
+  //获取用户公开信息
   getUserInfo: function(e) {
     var that = this;
     if (e.detail.userInfo) {
@@ -59,10 +38,15 @@ Page({
         })
       }, 400)
       var openId = wx.getStorageSync("openId")
+      var userId = wx.getStorageSync("userId")
       if (openId) {
-        wx.reLaunch({
-          url: '../index/index',
-        })
+        if (userId != ''){
+          wx.reLaunch({
+            url: '../index/index',
+          })
+        }else{
+          this.isLogin();
+        }
       } else {
         this.isLogin();
       }
@@ -75,6 +59,7 @@ Page({
       })
     }
   },
+  // 用户登录
   isLogin() {
     var that = this
     wx.login({
@@ -90,15 +75,16 @@ Page({
             success(res) {
               wx.setStorageSync("openId", res.data.openId);
               wx.setStorageSync("userId", res.data.userId);
-              wx.setStorageSync("userInfoId", res.data.userInfoId);
               wx.setStorageSync("userName", res.data.userName);
+              wx.setStorageSync("userInfoId", res.data.userInfoId);
+              wx.setStorageSync("session_key", res.data.session_key);
               if (res.data.code == 0 && res.data.data == true) {
                 wx.reLaunch({
                   url: '../index/index',
                 })
               } else if (res.data.code == 0 && res.data.data == false) {
                 that.setData({
-                  hasUserInfo: false
+                  hasUserInfo: true
                 })
               } else if (res.data.code = 1) {
                 wx.showToast({
@@ -121,6 +107,7 @@ Page({
       }
     })
   },
+  //用户绑定手机号
   getPhoneNumber(e) {
     var that = this;
     this.setData({
@@ -130,7 +117,8 @@ Page({
       wx.request({
         url: that.data.feiyu + '/phone/login/afterWeChatPhone',
         data: {
-          encrypt: e.detail
+          encrypt: e.detail,
+          session_key: wx.getStorageSync("session_key")
         },
         header: {
           "openId": wx.getStorageSync("openId"),
@@ -141,6 +129,8 @@ Page({
         success(res) {
           console.log(res.data)
           if (res.data.code == 0) {
+            wx.setStorageSync("userId", res.data.userId);
+            wx.setStorageSync("userName", res.data.userName);
             wx.reLaunch({
               url: '../index/index',
             })
@@ -153,90 +143,32 @@ Page({
 
     }
   },
-  getVerificationCode() {
-    if (this.data.phoneNumber == undefined || this.data.phoneNumber == null || this.data.phoneNumber == '') {
-      wx.showToast({
-        title: '手机号不能为空，请输入手机号',
-        icon: 'none'
+  //判断是否登录
+  judgementState(){
+    var openId = wx.getStorageSync('openId')
+    var userId = wx.getStorageSync('userId')
+    if(openId && userId != ''){
+      wx.reLaunch({
+        url: '/pages/index/index'
       })
-    } else {
-      settime(this);
-      wx.request({
-        url: this.data.feiyu + '/phone/login/register_sms?jbPhone=' + this.data.phoneNumber,
-        header: {
-          "openId": wx.getStorageSync("openId"),
-          "userId": wx.getStorageSync("userId"),
-          "userInfoId": wx.getStorageSync("userInfoId"),
-          "userName": wx.getStorageSync("userName")
-        },
-        success(res) {
-          wx.showToast({
-            title: '验证码发送成功',
-          })
-        }
+    }else if(openId && userId == ''){
+      this.setData({
+        qwer:true,
+        hasUserInfo:true
+      })
+    }else if(!openId && userId == ''){
+      this.setData({
+        qwer:false,
+        hasUserInfo:false
       })
     }
-  },
-  formSubmit: function(e) {
-    var that = this;
-    that.setData({
-      smsCode: e.detail.value.verCode
-    })
-    if (e.detail.value.phone == undefined || e.detail.value.phone == null || e.detail.value.phone == '') {
-      wx.showToast({
-        title: '手机号不能为空',
-        icon: 'none',
-        duration: 2000,
-        mask: true,
-      })
-    } else if (e.detail.value.verCode == undefined || e.detail.value.verCode == null || e.detail.value.verCode == '') {
-      wx.showToast({
-        title: '验证码不能为空',
-        icon: 'none',
-        duration: 2000,
-        mask: true,
-      })
-    } else {
-      wx.request({
-        url: that.data.feiyu + '/phone/login/bindPhone?smsCode=' + that.data.smsCode,
-        header: {
-          "openId": wx.getStorageSync("openId"),
-          "userId": wx.getStorageSync("userId"),
-          "userInfoId": wx.getStorageSync("userInfoId"),
-          "userName": wx.getStorageSync("userName")
-        },
-        success(res) {
-          console.log(res)
-          if (res.data.code == 1) {
-            wx.showToast({
-              title: '手机号绑定失败',
-              icon: 'none',
-              duration: 2000,
-              mask: true,
-            })
-            wx.reLaunch({
-              url: '../index/index',
-            })
-          } else if (res.data.code == 0) {
-            wx.reLaunch({
-              url: '../index/index',
-            })
-          }
-        }
-      })
-    }
-
-  },
-  formReset: function() {
-    wx.reLaunch({
-      url: '../index/index',
-    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     this.getname();
+    this.judgementState()
   },
 
   /**

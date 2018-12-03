@@ -10,7 +10,7 @@
     <view class='liuyan' wx:if='{{commentAndReply.length}}'>
       <view class='list' wx:for="{{commentAndReply}}" wx:key="{{index}}">
         <view class='list-img'>
-          <image src="{{item.comment.head_image}}"></image>
+          <image src="{{item.comment.head_image}}" data-headImage="{{item.comment.head_image}}"></image>
         </view>
         <view class='list-content'>
           <view class='list-name'>

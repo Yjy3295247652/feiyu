@@ -8,7 +8,7 @@
     </view>
     <view class='text'>飞鱼学院</view>
   </view>
-  <view class='login' wx:if="{{qwer}}">
+  <view class='login' wx:if="{{qwer && hasUserInfo}}">
     <!-- <block wx:if="{{hasUserInfo && canIUse}}">
       <form class='kuang' bindsubmit="formSubmit" bindreset="formReset">
         <view class='user'>
